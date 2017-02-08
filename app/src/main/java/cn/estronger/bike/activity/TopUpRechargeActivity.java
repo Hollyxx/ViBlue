@@ -145,7 +145,7 @@ public class TopUpRechargeActivity extends BaseActivity implements MyHttpUtils.M
         btn_pay.setEnabled(true);
         showMsg(result);
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {

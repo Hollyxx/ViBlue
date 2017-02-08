@@ -198,7 +198,7 @@ public class WalletRechargeActivity extends BaseActivity implements MyHttpUtils.
     @Override
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         btn_pay.setEnabled(true);

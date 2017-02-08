@@ -1169,7 +1169,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
     @Override  //请求成功后
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {

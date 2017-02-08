@@ -198,7 +198,7 @@ public class TravelDetailActivity extends BaseActivity implements MyHttpUtils.My
     @Override
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {

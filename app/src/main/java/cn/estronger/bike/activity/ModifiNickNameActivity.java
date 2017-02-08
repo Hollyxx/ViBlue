@@ -84,7 +84,7 @@ public class ModifiNickNameActivity extends BaseActivity implements View.OnClick
     public void onSuccess(String result, int whereRequest) {
         showMsg(result);
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {

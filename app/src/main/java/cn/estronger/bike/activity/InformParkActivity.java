@@ -281,7 +281,7 @@ public class InformParkActivity extends BaseActivity implements View.OnClickList
     public void onSuccess(String result, int whereRequest) {
         showMsg(result);
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {

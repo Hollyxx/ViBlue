@@ -166,7 +166,7 @@ public class TopUpDepositActivity extends BaseActivity implements MyHttpUtils.My
         btn_pay.setEnabled(true);
         showMsg(result);
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {

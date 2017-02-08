@@ -180,7 +180,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {

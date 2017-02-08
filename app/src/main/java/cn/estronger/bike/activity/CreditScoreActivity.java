@@ -108,7 +108,7 @@ public class CreditScoreActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {

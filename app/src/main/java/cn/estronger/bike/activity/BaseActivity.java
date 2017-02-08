@@ -127,7 +127,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 避免重复登录
     */
-    public void exitLogin(Context context) {
+    public void exitLogin(Context context,String result) {
+        showMsg(result);
         SysApplication.getInstance().exit();//关闭整个程序
         startActivity(new Intent(context,PhoneNumVerifyActivity.class).putExtra("from","relogin"));
         PrefUtils.clear(context);

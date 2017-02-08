@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapOptions;
@@ -53,6 +54,10 @@ public class RideOverActivity extends BaseActivity implements View.OnClickListen
     MapView mMapView;
     @ViewInject(R.id.rl_container)
     RelativeLayout rl_container;
+    @ViewInject(R.id.tv_coupon_text)
+    TextView tv_coupon_text;
+    @ViewInject(R.id.tv_coupon)
+    TextView tv_coupon;
     private AMap aMap;
     private PopWindowSrevice popSrevice;
     private TraceOverlay overlay;
@@ -210,7 +215,7 @@ public class RideOverActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this);
+            exitLogin(this,result);
             return;
         }
         switch (whereRequest) {
@@ -227,6 +232,9 @@ public class RideOverActivity extends BaseActivity implements View.OnClickListen
                     ViewTools.setStringToTextView(RideOverActivity.this, R.id.tv_min, data.getTime().getHours()!=0?(data.getTime().getHours()*60+data.getTime().getMin()+""):data.getTime().getMin()+"");
                     ViewTools.setStringToTextView(RideOverActivity.this, R.id.tv_tan, data.getEmission()+"");
                     ViewTools.setStringToTextView(RideOverActivity.this, R.id.tv_cll, data.getCalorie()+"");
+                    tv_coupon_text.setTextColor(getResources().getColor(R.color.gray));
+                    tv_coupon.setTextColor(getResources().getColor(R.color.gray));
+                    tv_coupon.setText("无");
                     List<CurrentOrder.DataBean.LineDataBean> listBean=data.getLine_data();
                     for (int i = 0; i <listBean.size() ; i++) {
                         JZLocationConverter.LatLng latlng=JZLocationConverter.wgs84ToGcj02(new JZLocationConverter.LatLng(Double.parseDouble(listBean.get(i).getLat()),Double.parseDouble(listBean.get(i).getLng())));
