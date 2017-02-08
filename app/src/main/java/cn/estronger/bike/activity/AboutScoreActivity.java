@@ -62,6 +62,4 @@ public class AboutScoreActivity extends BaseActivity {
                 break;
         }
     }
-
-
 }

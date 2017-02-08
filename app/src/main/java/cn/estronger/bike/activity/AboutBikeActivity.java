@@ -58,6 +58,4 @@ public class AboutBikeActivity extends BaseActivity {
                 break;
         }
     }
-
-
 }

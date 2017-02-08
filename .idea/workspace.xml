@@ -8,31 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="851a65c7-301c-48e4-bc46-564cdbec5d2e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/BaseActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/BaseActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CertificationActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CertificationActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ChangePhoneActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ChangePhoneActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CreditScoreActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CreditScoreActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/FindBikeFaultActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/FindBikeFaultActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InformParkActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InformParkActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InputBikeNumActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InputBikeNumActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiNickNameActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiNickNameActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyMessageActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyMessageActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyTravelActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyTravelActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyWalletActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyWalletActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/OtherActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/OtherActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ParkingPhotoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ParkingPhotoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RideOverActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RideOverActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/SettingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/SettingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpDepositActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpDepositActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpRechargeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpRechargeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TravelDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TravelDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserGuideActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserGuideActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletRechargeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletRechargeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_ride_over.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_ride_over.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutBikeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutBikeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutEbikeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutEbikeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutScoreActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutScoreActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/GuideActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/GuideActivity.java" />
     </list>
     <ignored path="xiaoqiang.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,101 +37,101 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ParkingPhotoActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ParkingPhotoActivity.java">
+      <file leaf-file-name="GuideActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/GuideActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="252" column="12" selection-start-line="252" selection-start-column="12" selection-end-line="252" selection-end-column="12" />
+            <state relative-caret-position="790">
+              <caret line="185" column="1" selection-start-line="25" selection-start-column="0" selection-end-line="185" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RideOverActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RideOverActivity.java">
+      <file leaf-file-name="InformParkActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InformParkActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="217" column="12" selection-start-line="217" selection-start-column="12" selection-end-line="217" selection-end-column="12" />
+            <state relative-caret-position="182">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="305" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/SettingActivity.java">
+      <file leaf-file-name="InputBikeNumActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InputBikeNumActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="118" column="12" selection-start-line="118" selection-start-column="12" selection-end-line="118" selection-end-column="12" />
+            <state relative-caret-position="234">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="174" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopUpDepositActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpDepositActivity.java">
+      <file leaf-file-name="InputBikeNumOtherActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InputBikeNumOtherActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="168" column="12" selection-start-line="168" selection-start-column="12" selection-end-line="168" selection-end-column="12" />
+            <state relative-caret-position="790">
+              <caret line="148" column="1" selection-start-line="26" selection-start-column="0" selection-end-line="148" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopUpRechargeActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpRechargeActivity.java">
+      <file leaf-file-name="IntroActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/IntroActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
+            <state relative-caret-position="790">
+              <caret line="203" column="1" selection-start-line="28" selection-start-column="0" selection-end-line="203" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TravelDetailActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TravelDetailActivity.java">
+      <file leaf-file-name="InviteFriendActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InviteFriendActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="200" column="12" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="12" />
+            <state relative-caret-position="790">
+              <caret line="195" column="1" selection-start-line="39" selection-start-column="0" selection-end-line="195" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserGuideActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserGuideActivity.java">
+      <file leaf-file-name="KeepUseBikeActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/KeepUseBikeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="119" column="12" selection-start-line="119" selection-start-column="12" selection-end-line="119" selection-end-column="12" />
+            <state relative-caret-position="790">
+              <caret line="67" column="1" selection-start-line="22" selection-start-column="0" selection-end-line="67" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserInfoActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserInfoActivity.java">
+      <file leaf-file-name="ModifiNickNameActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiNickNameActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="182" column="12" selection-start-line="182" selection-start-column="12" selection-end-line="182" selection-end-column="12" />
+            <state relative-caret-position="208">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="105" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WalletDetailActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletDetailActivity.java">
+      <file leaf-file-name="ModifiPhoneActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiPhoneActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="107" column="12" selection-start-line="107" selection-start-column="12" selection-end-line="107" selection-end-column="12" />
+            <state relative-caret-position="790">
+              <caret line="89" column="1" selection-start-line="25" selection-start-column="0" selection-end-line="89" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WalletRechargeActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletRechargeActivity.java">
+      <file leaf-file-name="MyMessageActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyMessageActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="200" column="12" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="12" />
+            <state relative-caret-position="390">
+              <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -1974,6 +1953,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserInfoActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletDetailActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletRechargeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutBikeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutEbikeActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutScoreActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/GuideActivity.java" />
       </list>
     </option>
   </component>
@@ -2198,6 +2181,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bike" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xiaoqiang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xiaoqiang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bike" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2533,12 +2554,19 @@
       <option name="project" value="LOCAL" />
       <updated>1486530825191</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1，二次提交">
+      <created>1486533253553</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1486533253553</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -2561,7 +2589,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2579,7 +2607,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1，首次提交" />
-    <option name="LAST_COMMIT_MESSAGE" value="1，首次提交" />
+    <MESSAGE value="1，二次提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="1，二次提交" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2640,70 +2669,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="556">
           <caret line="130" column="24" selection-start-line="130" selection-start-column="8" selection-end-line="130" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CertificationActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="89" column="35" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ChangePhoneActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="120" column="12" selection-start-line="120" selection-start-column="12" selection-end-line="120" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CreditScoreActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="110" column="12" selection-start-line="110" selection-start-column="12" selection-end-line="110" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/FindBikeFaultActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="383" column="12" selection-start-line="383" selection-start-column="12" selection-end-line="383" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InformParkActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="283" column="12" selection-start-line="283" selection-start-column="12" selection-end-line="283" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InputBikeNumActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="153" column="12" selection-start-line="153" selection-start-column="12" selection-end-line="153" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiNickNameActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="86" column="12" selection-start-line="86" selection-start-column="12" selection-end-line="86" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyMessageActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="117" column="12" selection-start-line="117" selection-start-column="12" selection-end-line="117" selection-end-column="12" />
           <folding />
         </state>
       </provider>
@@ -2808,6 +2773,158 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="200" column="12" selection-start-line="200" selection-start-column="12" selection-end-line="200" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutBikeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="60" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutEbikeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutScoreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="64" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutUsActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="88" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/BaseNaviActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="289" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CertificationActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="114" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ChangePhoneActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="150" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CreditScoreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="140" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/FindBikeFaultActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="405" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/GuideActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="790">
+          <caret line="185" column="1" selection-start-line="25" selection-start-column="0" selection-end-line="185" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InformParkActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="305" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InputBikeNumActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="174" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InputBikeNumOtherActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="790">
+          <caret line="148" column="1" selection-start-line="26" selection-start-column="0" selection-end-line="148" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/IntroActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="790">
+          <caret line="203" column="1" selection-start-line="28" selection-start-column="0" selection-end-line="203" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InviteFriendActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="790">
+          <caret line="195" column="1" selection-start-line="39" selection-start-column="0" selection-end-line="195" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/KeepUseBikeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="790">
+          <caret line="67" column="1" selection-start-line="22" selection-start-column="0" selection-end-line="67" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiNickNameActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="105" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiPhoneActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="790">
+          <caret line="89" column="1" selection-start-line="25" selection-start-column="0" selection-end-line="89" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyMessageActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="38" column="30" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
           <folding />
         </state>
       </provider>

@@ -24,9 +24,6 @@ import cn.estronger.bike.utils.PrefUtils;
 import org.xutils.x;
 
 public class GuideActivity extends Activity implements OnClickListener {
-
-//	private static final int[] mImageIds = new int[] { R.mipmap.splash,
-//			R.mipmap.splash,};
 	String[] drawableRes = new String[] { "assets://01.png", "assets://02.png", "assets://03.png", "assets://04.png","assets://05.png"};
 	private ViewPager vpGuide;
 	private ArrayList<ImageView> mImageViewList;

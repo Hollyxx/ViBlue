@@ -62,6 +62,4 @@ public class AboutEbikeActivity extends BaseActivity {
                 break;
         }
     }
-
-
 }
