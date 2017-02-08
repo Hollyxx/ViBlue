@@ -44,6 +44,10 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
     RelativeLayout rl_content;
     @ViewInject(R.id.rl_empty)
     RelativeLayout rl_empty;
+    @ViewInject(R.id.tv_history_coupon)
+    TextView tv_history_coupon;
+    @ViewInject(R.id.ll_use_rule)
+    LinearLayout ll_use_rule;
     @ViewInject(R.id.xrv_list)
     XRecyclerView mRecyclerView;
     private int type;
@@ -69,6 +73,8 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
         SysApplication.getInstance().addActivity(this);
         iv_back.setOnClickListener(this);
         tv_detail.setOnClickListener(this);
+        tv_history_coupon.setOnClickListener(this);
+        ll_use_rule.setOnClickListener(this);
         btn_pay.setOnClickListener(this);
         tv_recharge_or_refund.setOnClickListener(this);
     }
@@ -104,7 +110,12 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
                 myDialog.dismiss();
                 Connect.cashApply(this,this);
                 break;
-
+            case R.id.tv_history_coupon:
+                startActivity(new Intent(this, CouponHistoryActivity.class));
+                break;
+            case R.id.ll_use_rule://使用规则
+                startActivity(new Intent(this, CouponHistoryActivity.class));
+                break;
         }
     }
 

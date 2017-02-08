@@ -261,6 +261,9 @@
         <activity
             android:name="cn.estronger.bike.activity.AboutUsActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.CouponHistoryActivity"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name="cn.estronger.bike.utils.MyReceiver"
