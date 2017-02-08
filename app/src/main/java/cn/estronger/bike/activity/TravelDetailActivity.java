@@ -185,7 +185,7 @@ public class TravelDetailActivity extends BaseActivity implements MyHttpUtils.My
         oks.setUrl(NetConstant.SHARE+"order_id="+datas.getOrder_info().getOrder_id()+"&user_id="+PrefUtils.getString(
                 TravelDetailActivity.this, "user_id", "-1")+"&sign="+MD5.md5(PrefUtils.getString(TravelDetailActivity.this, "user_id", "-1") + SystemTools.getPhoneId()));
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("扫描骑行，低碳生活");
+        oks.setComment("邀请您加入小强单车，共享绿色生活");
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite("小强单车");
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用

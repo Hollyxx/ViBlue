@@ -114,7 +114,7 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(this, CouponHistoryActivity.class));
                 break;
             case R.id.ll_use_rule://使用规则
-                startActivity(new Intent(this, CouponHistoryActivity.class));
+//                startActivity(new Intent(this,WebViewActivity.class).putExtra("title","押金说明"));
                 break;
         }
     }
