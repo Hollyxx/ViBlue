@@ -129,7 +129,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     */
     public void exitLogin(Context context) {
         SysApplication.getInstance().exit();//关闭整个程序
-        startActivity(new Intent(context,PhoneNumVerifyActivity.class));
+        startActivity(new Intent(context,PhoneNumVerifyActivity.class).putExtra("from","relogin"));
         PrefUtils.clear(context);
     }
 }

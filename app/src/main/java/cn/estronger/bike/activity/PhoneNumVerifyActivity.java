@@ -172,6 +172,10 @@ public class PhoneNumVerifyActivity extends BaseActivity implements TextWatcher,
                         PrefUtils.setString(PhoneNumVerifyActivity.this, "avatar", state);
                     } catch (JSONException e) {
                     }
+                    //判断是不是挤下线后重新登录的
+                    if ("relogin".equals(getIntent().getStringExtra("from"))){
+                        startActivity(new Intent(PhoneNumVerifyActivity.this, MainActivity.class));
+                    }
                     if ("0".equals(state)) {//去充值页面
                         startActivity(new Intent(PhoneNumVerifyActivity.this, TopUpDepositActivity.class));
                     } else if ("1".equals(state)) {//去实名认证界面
