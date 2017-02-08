@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <include
+        android:id="@+id/view_header"
+        layout="@layout/layout_header" />
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        style="@style/tittleStyle"
+        android:layout_below="@id/view_header">
+
+        <ImageView
+            android:id="@+id/iv_home_seach"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:padding="8dp"
+            android:src="@drawable/home_btn_seach_seletor" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="4dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#ffffff" />
+
+        <EditText
+            android:id="@+id/et_addr"
+            style="@style/EtStyle" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_title"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="我的位置"
+                android:textColor="#363636"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:textColor="#696969"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/xrv_list_history"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/rl_title" />
+
+        <RelativeLayout
+            android:id="@+id/rl_clear"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/white_btn_seletor">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="清空历史记录" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xrv_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        android:layout_below="@id/rl_title"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/index_drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/view_header"
+            layout="@layout/layout_header" />
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            style="@style/tittleStyle"
+            android:layout_below="@id/view_header">
+
+            <ImageView
+                android:id="@+id/iv_home_head"
+                style="@style/IvHeaderStyle" />
+
+            <TextView
+                android:text="首页"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/iv_home_seach"
+                style="@style/IvSeachStyle" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bike_category"
+            style="@style/tittleStyle"
+            android:layout_below="@id/rl_title"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/rl_all"
+                style="@style/RlFneLeiStyle">
+
+                <TextView
+                    android:id="@+id/tv_all"
+                    style="@style/TvFneLeiStyle"
+                    android:text="全部" />
+
+                <View
+                    style="@style/HomeBootomStyle"
+                    android:layout_below="@id/tv_all" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_single"
+                style="@style/RlFneLeiStyle">
+
+                <LinearLayout
+                    android:id="@+id/ll_single"
+                    style="@style/LlStyle">
+
+                    <TextView
+                        android:id="@+id/tv_single"
+                        style="@style/TvFneLeiStyle"
+                        android:text="单人" />
+
+                    <View
+                        style="@style/HomeBootomStyle"
+                        android:layout_below="@id/tv_single" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/LlStyle1"
+                    android:layout_toLeftOf="@id/ll_single">
+
+                    <ImageView
+                        android:id="@+id/iv_green_dot"
+                        style="@style/IvDotStyle"
+                        android:src="@drawable/dot_green" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_double"
+                style="@style/RlFneLeiStyle">
+
+                <LinearLayout
+                    android:id="@+id/ll_double"
+                    style="@style/LlStyle">
+
+                    <TextView
+                        android:id="@+id/tv_double"
+                        style="@style/TvFneLeiStyle"
+                        android:text="双人" />
+
+                    <View
+                        style="@style/HomeBootomStyle"
+                        android:layout_below="@id/tv_double" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/LlStyle1"
+                    android:layout_toLeftOf="@id/ll_double">
+
+                    <ImageView
+                        android:id="@+id/iv_pink_dot"
+                        style="@style/IvDotStyle"
+                        android:src="@drawable/dot_pink" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_family"
+                style="@style/RlFneLeiStyle">
+
+                <LinearLayout
+                    android:id="@+id/ll_family"
+                    style="@style/LlStyle">
+
+                    <TextView
+                        android:id="@+id/tv_family"
+                        style="@style/TvFneLeiStyle"
+                        android:text="家庭" />
+
+                    <View
+                        style="@style/HomeBootomStyle"
+                        android:layout_below="@id/tv_family" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/LlStyle1"
+                    android:layout_toLeftOf="@id/ll_family">
+
+                    <ImageView
+                        android:id="@+id/iv_yellow_dot"
+                        style="@style/IvDotStyle"
+                        android:src="@drawable/dot_yellow" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout style="@style/RlbStyle">
+
+            <com.amap.api.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <RelativeLayout
+                android:id="@+id/rl_pos"
+                android:layout_width="25dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/iv_position"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@mipmap/home_map_position" />
+            </RelativeLayout>
+            
+            <ImageView
+                android:id="@+id/iv_hint"
+                android:visibility="invisible"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@+id/rl_pos"
+                android:src="@mipmap/home_bubble_2"
+                android:layout_width="99dp"
+                android:layout_height="40dp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp">
+
+                <ImageButton
+                    android:id="@+id/ib_location"
+                    style="@style/ImageButtonStyle"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/home_btn_position_seletor" />
+
+                <ImageButton
+                    android:id="@+id/ib_zxing"
+                    style="@style/ZxingStyle" />
+
+                <ImageButton
+                    android:id="@+id/ib_service"
+                    style="@style/ImageButtonStyle"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/home_btn_service_seletor" />
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_pb"
+                android:visibility="gone"
+                android:layout_above="@id/rl_bottom"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="45dp"
+                android:src="@mipmap/loading"
+                android:layout_height="45dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_runing"
+            style="@style/llrunStyle">
+            <include
+                layout="@layout/layout_runing"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_start_order"
+            style="@style/llrunStyle">
+            <include
+                layout="@layout/layout_start_order"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_ordering"
+            style="@style/llrunStyle">
+            <include
+                layout="@layout/layout_ordering"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/dl_menu"
+        style="@style/DrawerStyle"
+        layout="@layout/layout_nav" />
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">小强单车</string>
+    <string name="permission">权限(permission)</string>
+    <string name="no_permissions">应用需要必要的运行权限</string>
+
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
+    <string name="quit">退出</string>
+    <string name="permission_location_rationale">当前应用需要使用定位权限，如果不授予权限，定位功能将无法使用</string>
+    <string name="permission_sensor_rationale">当前应用需要使用传感器权限，如果不授予权限，部分功能将无法使用</string>
+    <string name="permission_storage_rationale">当前应用需要使用读写内存卡权限，如果不授予权限，部分功能将无法使用</string>
+    <string name="permission_camera_rationale">当前应用需要使用相机权限，如果不授予权限，扫码功能将无法使用</string>
+    <string name="permission_contact_rationale">当前应用需要使用通讯录权限，如果不授予权限，将无法直接从通讯获取推荐人手机号</string>
+    <string name="permission_location_never_askagain">你已经禁止了定位权限，并且勾选了不再询问，请到设置里面打开定位权限，否则将会影响你的正常使用</string>
+    <string name="permission_contact_never_askagain">你已经禁止了通讯录权限，并且勾选了不再询问，请到设置里面打开通讯录权限，否则将会影响你的正常使用</string>
+    <string name="permission_camera_never_askagain">你已经禁止了相机权限，并且勾选了不再询问，请到设置里面打开相机权限，否则将会影响你的正常使用</string>
+    <string name="permission_sensor_never_askagain">你已经禁止了传感器权限，并且勾选了不再询问，请到设置里面打开传感器权限，否则将会影响你的正常使用</string>
+    <string name="permission_storage_never_askagain">你已经禁止了存储卡权限，并且勾选了不再询问，请到设置里面打开存储卡权限，否则将会影响你的正常使用</string>
+</resources>

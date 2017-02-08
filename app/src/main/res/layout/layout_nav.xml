@@ -1,0 +1,174 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#ffffff">
+
+        <cn.estronger.bike.widget.CircularImage
+            android:id="@+id/ci_head_img"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="38dp"
+            android:src="@mipmap/user_avatar_default" />
+
+        <TextView
+            android:id="@+id/tv_phone_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ci_head_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btn_logion_or_integral"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@id/ci_head_img"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/semi_round_backgroud"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="13sp"
+            android:text="注册/登录"
+            android:textColor="#ffffff" />
+
+        <View
+            android:id="@+id/line1"
+            style="@style/line"
+            android:layout_below="@id/btn_logion_or_integral"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_my_wallet"
+                style="@style/llDrawerStyle"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    style="@style/ivDrawerStyle"
+                    android:src="@mipmap/user_ic_wallet" />
+
+                <TextView
+                    style="@style/textviewStyle"
+                    android:text="我的钱包" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_route"
+                style="@style/llDrawerStyle">
+
+                <ImageView
+                    style="@style/ivDrawerStyle"
+                    android:src="@mipmap/user_ic_trip" />
+
+                <TextView
+                    style="@style/textviewStyle"
+                    android:text="我的行程" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_my_msg"
+                style="@style/llDrawerStyle">
+
+                <ImageView
+                    style="@style/ivDrawerStyle"
+                    android:src="@mipmap/user_ic_message" />
+
+                <TextView
+                    style="@style/textviewStyle"
+                    android:text="我的消息" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_invite_friend"
+                style="@style/llDrawerStyle">
+
+                <ImageView
+                    style="@style/ivDrawerStyle"
+                    android:src="@mipmap/user_ic_share" />
+
+                <TextView
+                    style="@style/textviewStyle"
+                    android:text="邀请好友" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line2"
+            style="@style/line"
+            android:layout_below="@id/ll_one"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/line2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_user_guide"
+                style="@style/llDrawerStyle"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    style="@style/ivDrawerStyle"
+                    android:src="@mipmap/user_ic_help" />
+
+                <TextView
+                    style="@style/textviewStyle"
+                    android:text="用户指南" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_setting"
+                style="@style/llDrawerStyle">
+
+                <ImageView
+                    style="@style/ivDrawerStyle"
+                    android:src="@mipmap/user_ic_setting" />
+
+                <TextView
+                    style="@style/textviewStyle"
+                    android:text="设置" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line3"
+            style="@style/line"
+            android:layout_below="@id/ll_two"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-5dp"
+            android:src="@mipmap/user_bottom" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

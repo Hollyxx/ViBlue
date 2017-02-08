@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.estronger.bike">
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--定位包、导航包需要的额外权限（注：基础权限也需要）-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+    <!--这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <!-- 不是SDK需要的权限，是示例中的后台唤醒定位需要的权限 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!--读取缓存数据-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 更改设置 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 3.2.0版本增加 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- 3.2.0版本增加-->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <application
+        android:name="cn.estronger.bike.application.MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="42d9f3c857f4118cc5704b1566e3bca1" />
+        <service android:name="com.amap.api.location.APSService"></service>
+
+
+        <activity
+            android:name="cn.estronger.bike.activity.WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="cn.estronger.bike.activity.GuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="cn.estronger.bike.activity.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.ZxingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.InputBikeNumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.PhoneNumVerifyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.TopUpDepositActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.CertificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.RegisterOverActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.CreditScoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <!-- 摄像头界面 -->
+        <activity
+            android:name="com.OpenCameraActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+            <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
+            <intent-filter>
+                <data android:scheme="tencent1105953374" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <!-- 新浪微博客户端分享回调必须配置 -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--微信分享回调 -->
+        <activity
+            android:name="cn.estronger.bike.wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="cn.estronger.bike.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name="cn.estronger.bike.activity.ModifiNickNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.MyWalletActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.WalletRechargeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.TopUpRechargeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.RefundDepositActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.MyTravelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.MyMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.InviteFriendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.UserGuideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.OpenLockNumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.SeachActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.ModifiPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.ChangePhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.ParkingPhotoActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.RideOverActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.WalletDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.TravelDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.PermissionsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.WebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.NaviActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.NeedHelpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.InformParkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.ZxingOtherActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.InputBikeNumOtherActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.UserGuideMoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.IntroActivity"
+            android:theme="@style/TranslucentTheme"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.FindBikeFaultActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.RegAndAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.OrderAndOpenLockActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.PriceAndDepositActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.RepayBikeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.KeepUseBikeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.AboutBikeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.AboutEbikeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.AboutScoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.OtherActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.AboutUsActivity"
+            android:screenOrientation="portrait" />
+
+        <receiver
+            android:name="cn.estronger.bike.utils.MyReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" /> <!--Optional 用户接受Rich Push Javascript 回调函数的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="cn.estronger.bike" />
+            </intent-filter>
+        </receiver>
+
+
+    </application>
+
+</manifest>

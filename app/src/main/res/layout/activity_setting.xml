@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_contanier"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_header_view" />
+
+
+    <RelativeLayout
+        android:id="@+id/rl_user_argument"
+        style="@style/RlStyle"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="用户协议" />
+
+        <ImageView
+            android:id="@+id/iv_next"
+            style="@style/IvNextStyle" />
+
+
+    </RelativeLayout>
+
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_top_up_info"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="押金说明" />
+
+        <ImageView
+            android:id="@+id/iv_nick_name"
+            style="@style/IvNextStyle" />
+
+    </RelativeLayout>
+
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_recharge_argument"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="充值协议" />
+
+        <ImageView style="@style/IvNextStyle" />
+
+    </RelativeLayout>
+
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_expense_argument"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="消费协议" />
+
+        <ImageView style="@style/IvNextStyle" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_update"
+        style="@style/RlStyle"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="检查新版本" />
+
+        <ImageView style="@style/IvNextStyle" />
+    </RelativeLayout>
+
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_about_us"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="关于我们" />
+
+        <ImageView style="@style/IvNextStyle" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_exit"
+        style="@style/RlStyle"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="退出登录" />
+    </RelativeLayout>
+</LinearLayout>

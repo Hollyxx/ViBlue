@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="KiraLibrary_fat">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/KiraLibrary_fat.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

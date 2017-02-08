@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_contanier"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_header_view" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:textSize="13sp"
+            android:text="问题类型"/>
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_reg_and_login"
+        style="@style/RlStyle">
+
+        <TextView style="@style/TvStyle"
+            android:text="注册与账户"/>
+
+        <ImageView
+            android:id="@+id/iv_next"
+            style="@style/IvNextStyle" />
+
+
+    </RelativeLayout>
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_order_and_openlock"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="预约与开关锁" />
+
+        <ImageView
+            android:id="@+id/iv_nick_name"
+            style="@style/IvNextStyle" />
+
+    </RelativeLayout>
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_price_and_yajin"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="车费与押金" />
+        <ImageView
+            style="@style/IvNextStyle" />
+
+    </RelativeLayout>
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_about_return_bike"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="还车相关" />
+
+        <ImageView
+            style="@style/IvNextStyle" />
+
+    </RelativeLayout>
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_save_bike"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="保留用车" />
+
+        <ImageView
+            style="@style/IvNextStyle" />
+    </RelativeLayout>
+    <View style="@style/LineStyle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_about_bike"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="关于单车" />
+
+        <ImageView
+            style="@style/IvNextStyle" />
+    </RelativeLayout>
+    <View style="@style/LineStyle" />
+    <RelativeLayout
+        android:id="@+id/rl_about_ebike"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="关于小强" />
+
+        <ImageView
+            style="@style/IvNextStyle" />
+    </RelativeLayout>
+    <View style="@style/LineStyle" />
+    <RelativeLayout
+        android:id="@+id/rl_about_jifen"
+        style="@style/RlStyle">
+
+        <TextView
+            style="@style/TvStyle"
+            android:text="小强信用分" />
+
+        <ImageView
+            style="@style/IvNextStyle" />
+    </RelativeLayout>
+
+</LinearLayout>
