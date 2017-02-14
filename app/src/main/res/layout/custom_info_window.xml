@@ -6,7 +6,7 @@ android:background="@android:color/transparent"
     <RelativeLayout
         android:layout_width="80dp"
         android:background="@mipmap/home_bubble"
-        android:layout_height="35dp">
+        android:layout_height="33dp">
     </RelativeLayout>
 
 </LinearLayout>

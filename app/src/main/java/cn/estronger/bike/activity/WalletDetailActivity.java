@@ -95,7 +95,7 @@ public class WalletDetailActivity extends BaseActivity implements MyHttpUtils.My
                 finish();
                 break;
             case R.id.tv_info:
-                startActivity(new Intent(WalletDetailActivity.this,WebViewActivity.class).putExtra("title","押金说明"));
+                startActivity(new Intent(WalletDetailActivity.this,WebViewActivity.class).putExtra("title","退款说明"));
                 break;
             default:
                 break;

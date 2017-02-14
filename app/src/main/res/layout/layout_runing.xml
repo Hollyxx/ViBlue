@@ -98,11 +98,32 @@
             android:layout_weight="1"
             android:gravity="center">
 
+
+            <TextView
+                android:id="@+id/tv_riding_time_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="时"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/tv_riding_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="0"
                 android:textColor="#ffffff"
                 android:textSize="22sp" />
 
@@ -170,28 +191,30 @@
 
     <View
         style="@style/line"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="10dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/tv_bh"
+            android:gravity="bottom"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:text="编号"
+            android:layout_marginBottom="3dp"
             android:textColor="#ffffff" />
 
         <TextView
+            android:text="123456"
             android:id="@+id/tv_riding_bike_num"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/tv_bh"
             android:textColor="#ffffff"
@@ -199,7 +222,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:gravity="center_vertical"
@@ -207,17 +230,20 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="8dp"
                 android:text="当前花费"
+                android:gravity="bottom"
+                android:layout_marginBottom="2dp"
                 android:textColor="#ffffff" />
 
             <TextView
                 android:id="@+id/tv_cur_price"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="8dp"
                 android:text="0"
+                android:gravity="bottom"
                 android:textColor="#ffffff"
                 android:textSize="24sp" />
 
@@ -225,7 +251,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginBottom="3dp"
+                android:layout_marginBottom="2dp"
                 android:text="元"
                 android:textColor="#ffffff"
                 android:textSize="12sp" />

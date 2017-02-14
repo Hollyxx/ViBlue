@@ -65,7 +65,7 @@ public class WalletRechargeActivity extends BaseActivity implements MyHttpUtils.
     @ViewInject(R.id.btn_pay)
     Button btn_pay;
     private int pay_way = 1;   //1是支付宝   2是微信
-    private String amount = "0.01";   //10元    20元   50元  100元
+    private String amount = "10";   //10元    20元   50元  100元
     private IWXAPI wxapi;
     private static final int SDK_PAY_FLAG = 1;
     private MyDialog myDialog;
@@ -108,7 +108,7 @@ public class WalletRechargeActivity extends BaseActivity implements MyHttpUtils.
                 ll_20yuan.setSelected(false);
                 ll_50yuan.setSelected(false);
                 ll_100yuan.setSelected(false);
-                amount = "0.01";
+                amount = "10";
                 break;
             case R.id.ll_20yuan:
                 ll_10yuan.setSelected(false);

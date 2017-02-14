@@ -34,6 +34,7 @@ import com.tools.SystemTools;
 import com.tools.ViewTools;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONObject;
 import org.xutils.common.util.MD5;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -80,6 +81,10 @@ public class RideOverActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void init() {
+        //判断有没有存过  分享需要加密的内容
+        if ("null".equals(PrefUtils.getString(this, "encryptCode", "null"))) {
+            Connect.getEncryptCode(this, this);
+        }
         SysApplication.getInstance().addActivity(this);
         popSrevice = new PopWindowSrevice(this);
         popSrevice.initPopWindow(this);
@@ -192,22 +197,19 @@ public class RideOverActivity extends BaseActivity implements View.OnClickListen
         // title标题，印象笔记、邮箱、信息、微信、人人网、QQ和QQ空间使用
         oks.setTitle("小强单车行程分享");
         // titleUrl是标题的网络链接，仅在Linked-in,QQ和QQ空间使用
-        oks.setTitleUrl(NetConstant.SHARE_NOW+"order_id="+data.getOrder_id()+"&user_id="+PrefUtils.getString(
-                RideOverActivity.this, "user_id", "-1")+"&sign="+ MD5.md5(PrefUtils.getString(RideOverActivity.this, "user_id", "-1") + SystemTools.getPhoneId()));
+        oks.setTitleUrl(NetConstant.SHARE_NOW+"order_id="+data.getOrder_id()+"&encryptCode="+PrefUtils.getString(this, "encryptCode", "null"));
         // text是分享文本，所有平台都需要这个字段
         oks.setText("我在小强单车完成了一次骑行，快来一起骑行吧");
         //分享网络图片，新浪微博分享网络图片需要通过审核后申请高级写入接口，否则请注释掉测试新浪微博
         oks.setImageUrl(NetConstant.IMG_URL);
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl(NetConstant.SHARE_NOW+"order_id="+data.getOrder_id()+"&user_id="+PrefUtils.getString(
-                RideOverActivity.this, "user_id", "-1")+"&sign="+ MD5.md5(PrefUtils.getString(RideOverActivity.this, "user_id", "-1") + SystemTools.getPhoneId()));
+        oks.setUrl(NetConstant.SHARE_NOW+"order_id="+data.getOrder_id()+"&encryptCode="+PrefUtils.getString(this, "encryptCode", "null"));
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
         oks.setComment("邀请您加入小强单车，共享绿色生活");
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite("小强单车");
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl(NetConstant.SHARE_NOW+"order_id="+data.getOrder_id()+"&user_id="+PrefUtils.getString(
-                RideOverActivity.this, "user_id", "-1")+"&sign="+ MD5.md5(PrefUtils.getString(RideOverActivity.this, "user_id", "-1") + SystemTools.getPhoneId()));
+        oks.setSiteUrl(NetConstant.SHARE_NOW+"order_id="+data.getOrder_id()+"&encryptCode="+PrefUtils.getString(this, "encryptCode", "null"));
         // 启动分享GUI
         oks.show(this);
     }
@@ -251,6 +253,16 @@ public class RideOverActivity extends BaseActivity implements View.OnClickListen
                             (new LatLng(list.get(0).latitude,list.get(0).longitude), 16));
                 }
                 break;
+            case Connect.GET_ENCRYPT_CODE:
+                if (getCode(result) == 0) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        PrefUtils.setString(RideOverActivity.this, "encryptCode", data.getString("encrypt_code"));
+                    } catch (Exception e) {
+                    }
+                }
+                break;
         }
     }
 
@@ -258,6 +270,8 @@ public class RideOverActivity extends BaseActivity implements View.OnClickListen
     public void onError(String errorMsg, int whereRequest) {
         switch (whereRequest) {
             case Connect.GET_ORDER_INFO:
+                break;
+            case Connect.GET_ENCRYPT_CODE:
                 break;
         }
     }

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,16 +15,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import cn.estronger.bike.R;
+import cn.estronger.bike.adapter.MyCouponAdapter;
+import cn.estronger.bike.adapter.MyHistroyCouponAdapter;
 import cn.estronger.bike.application.SysApplication;
+import cn.estronger.bike.bean.Coupon;
+import cn.estronger.bike.bean.CouponHistroy;
 import cn.estronger.bike.bean.WalletInfoBean;
 import cn.estronger.bike.connect.Connect;
 import cn.estronger.bike.utils.MyHttpUtils;
+import cn.estronger.bike.utils.ToastUtils;
 import cn.estronger.bike.widget.MyDialog;
 import com.google.gson.Gson;
+import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import java.util.ArrayList;
+
+import static cn.estronger.bike.R.id.parent;
 
 /**
  * Created by MrLv on 2016/12/12.
@@ -55,6 +68,9 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
     private MyDialog myDialog;
     @ViewInject(R.id.view_header)
     LinearLayout view_header;
+    private int page=1,total_page,isOnRefresh=1;
+    private MyCouponAdapter mAdapter;
+    private ArrayList<Coupon.DataBean.ItemsBean> listData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +93,42 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
         ll_use_rule.setOnClickListener(this);
         btn_pay.setOnClickListener(this);
         tv_recharge_or_refund.setOnClickListener(this);
+        //优惠券列表
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+        mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
+        mRecyclerView.setEmptyView(rl_empty);
+        mRecyclerView.setLoadingMoreEnabled(true);
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                page=1;
+                isOnRefresh=2;
+                Connect.getCouponListNoPb(MyWalletActivity.this,"1",MyWalletActivity.this);
+            }
+
+            @Override
+            public void onLoadMore() {
+                if (total_page-page>0){
+                    page++;
+                    Connect.getCouponListNoPb(MyWalletActivity.this,page+"",MyWalletActivity.this);
+                }else {
+                    mRecyclerView.loadMoreComplete();
+                }
+            }
+        });
+        listData = new ArrayList<Coupon.DataBean.ItemsBean>();
+        mAdapter = new MyCouponAdapter(listData);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Connect.getWalletInfo(this,this);
+        Connect.getCouponListNoPb(this,page+"",this);
     }
 
     @Override
@@ -114,7 +160,7 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(this, CouponHistoryActivity.class));
                 break;
             case R.id.ll_use_rule://使用规则
-//                startActivity(new Intent(this,WebViewActivity.class).putExtra("title","押金说明"));
+                startActivity(new Intent(this,WebViewActivity.class).putExtra("title","优惠券使用规则"));
                 break;
         }
     }
@@ -148,6 +194,21 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
                 showMsg(result);
                 if (getCode(result) == 0) {
                     startActivity(new Intent(this, RefundDepositActivity.class));//退押金
+                }
+                break;
+            case Connect.GET_COUPON_LIST:
+                if (getCode(result) == 0) {
+                    Coupon coupon= new Gson().fromJson(result, Coupon.class);
+                    Coupon.DataBean data= coupon.getData();
+                    total_page=data.getTotal_pages();
+                    if (isOnRefresh==2){
+                        listData.clear();
+                        isOnRefresh=1;
+                    }
+                    listData.addAll(data.getItems());
+                    mAdapter.notifyDataSetChanged();
+                    mRecyclerView.loadMoreComplete();
+                    mRecyclerView.refreshComplete();
                 }
                 break;
         }

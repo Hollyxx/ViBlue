@@ -10,12 +10,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.iflytek.thirdparty.C;
+
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import cn.estronger.bike.R;
 import cn.estronger.bike.application.SysApplication;
+import cn.estronger.bike.bean.Contact;
+import cn.estronger.bike.bean.TravelDetail;
+import cn.estronger.bike.connect.Connect;
+import cn.estronger.bike.utils.MyHttpUtils;
+import cn.estronger.bike.utils.PrefUtils;
 import cn.estronger.bike.widget.MyDialog;
 
 import static cn.estronger.bike.R.id.rl_phone;
@@ -25,7 +33,7 @@ import static org.xutils.x.app;
  * Created by MrLv on 2016/12/12.
  */
 
-public class AboutUsActivity extends BaseActivity implements View.OnClickListener{
+public class AboutUsActivity extends BaseActivity implements View.OnClickListener, MyHttpUtils.MyHttpCallback {
     @ViewInject(R.id.iv_back)
     ImageView iv_back;
     @ViewInject(R.id.tv_title)
@@ -34,6 +42,12 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
     TextView tv_ver_name;
     @ViewInject(R.id.tv_phone_num)
     TextView tv_phone_num;
+    @ViewInject(R.id.tv_name)
+    TextView tv_name;
+    @ViewInject(R.id.tv_email)
+    TextView tv_email;
+    @ViewInject(R.id.tv_web)
+    TextView tv_web;
     @ViewInject(R.id.view_header)
     LinearLayout view_header;
     private MyDialog myDialog;
@@ -56,8 +70,8 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
         try {
             tv_ver_name.setText("V"+x.app().getPackageManager().getPackageInfo(AboutUsActivity.this.getPackageName(),0).versionName);
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
         }
+        Connect.getContact(this,this);
     }
 
     @Event(value = {R.id.iv_back,R.id.rl_phone,R.id.rl_web})
@@ -85,5 +99,28 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
         Uri data = Uri.parse("tel:" + tv_phone_num.getText().toString());
         intent.setData(data);
         startActivity(intent);
+    }
+
+    @Override
+    public void onSuccess(String result, int whereRequest) {
+        switch (whereRequest) {
+            case Connect.CONTACT:
+                if (getCode(result) == 0) {
+                    Contact contact = new Gson().fromJson(result, Contact.class);
+                    tv_name.setText(contact.getData().getWechat());
+                    tv_phone_num.setText(contact.getData().getPhone());
+                    tv_email.setText(contact.getData().getEmail());
+                    tv_web.setText(contact.getData().getWeb());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onError(String errorMsg, int whereRequest) {
+        switch (whereRequest) {
+            case Connect.CONTACT:
+                break;
+        }
     }
 }

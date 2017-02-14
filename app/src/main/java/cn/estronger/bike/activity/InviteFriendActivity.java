@@ -2,28 +2,28 @@ package cn.estronger.bike.activity;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
-import cn.estronger.bike.R;
-import cn.estronger.bike.application.SysApplication;
-import cn.estronger.bike.constant.NetConstant;
-import cn.estronger.bike.utils.ToastUtils;
-import cn.estronger.bike.utils.Utils;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
 
+import org.json.JSONObject;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.HashMap;
 
+import cn.estronger.bike.R;
+import cn.estronger.bike.application.SysApplication;
+import cn.estronger.bike.connect.Connect;
+import cn.estronger.bike.constant.NetConstant;
+import cn.estronger.bike.utils.MyHttpUtils;
+import cn.estronger.bike.utils.PrefUtils;
+import cn.estronger.bike.utils.ToastUtils;
+import cn.estronger.bike.utils.Utils;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -37,7 +37,7 @@ import cn.sharesdk.wechat.moments.WechatMoments;
  * Created by MrLv on 2016/12/12.
  */
 
-public class InviteFriendActivity extends BaseActivity {
+public class InviteFriendActivity extends BaseActivity implements MyHttpUtils.MyHttpCallback {
     @ViewInject(R.id.iv_back)
     ImageView iv_back;
     @ViewInject(R.id.iv_bg)
@@ -62,6 +62,10 @@ public class InviteFriendActivity extends BaseActivity {
     }
 
     private void init() {
+        //判断有没有存过  分享需要加密的内容
+        if ("null".equals(PrefUtils.getString(this, "encryptCode", "null"))) {
+            Connect.getEncryptCode(this, this);
+        }
         SysApplication.getInstance().addActivity(this);
         tv_title.setText("邀请好友");
         x.image().bind(iv_bg, "assets://user_share_bg.jpg");
@@ -78,11 +82,13 @@ public class InviteFriendActivity extends BaseActivity {
                 hud = Utils.createAutoHud(this);
                 QQ.ShareParams spQQ = new QQ.ShareParams();
                 spQQ.setTitle("小强单车");
-                spQQ.setTitleUrl("http://bike.estronger.cn/"); // 标题的超链接
+                spQQ.setTitleUrl("http://bike.e-stronger.com/bike/wechat/shareCoupon.html?encryptCode=" +
+                        PrefUtils.getString(this, "encryptCode", "null")); // 标题的超链接
                 spQQ.setText("扫码骑行，低碳生活，快邀请你的小伙伴一起加入吧！");
                 spQQ.setImageUrl(NetConstant.IMG_URL);
                 spQQ.setSite("小强单车");
-                spQQ.setSiteUrl("http://bike.estronger.cn/");
+                spQQ.setSiteUrl("http://bike.e-stronger.com/bike/wechat/shareCoupon.html?encryptCode=" +
+                        PrefUtils.getString(this, "encryptCode", "null"));
                 Platform qq = ShareSDK.getPlatform(QQ.NAME);
                 // 设置分享事件回调（注：回调放在不能保证在主线程调用，不可以在里面直接处理UI操作）
                 qq.setPlatformActionListener(paListener);
@@ -93,11 +99,13 @@ public class InviteFriendActivity extends BaseActivity {
                 hud = Utils.createAutoHud(this);
                 QZone.ShareParams sp = new QZone.ShareParams();
                 sp.setTitle("小强单车");
-                sp.setTitleUrl("http://bike.estronger.cn/"); // 标题的超链接
+                sp.setTitleUrl("http://bike.e-stronger.com/bike/wechat/shareCoupon.html?encryptCode=" +
+                        PrefUtils.getString(this, "encryptCode", "null")); // 标题的超链接
                 sp.setText("扫码骑行，低碳生活，快邀请你的小伙伴一起加入吧！");
                 sp.setImageUrl(NetConstant.IMG_URL);
                 sp.setSite("小强单车");
-                sp.setSiteUrl("http://bike.estronger.cn/");
+                sp.setSiteUrl("http://bike.e-stronger.com/bike/wechat/shareCoupon.html?encryptCode=" +
+                        PrefUtils.getString(this, "encryptCode", "null"));
                 Platform qzone = ShareSDK.getPlatform(QZone.NAME);
                 qzone.setPlatformActionListener(paListener);
                 // 执行图文分享
@@ -106,7 +114,8 @@ public class InviteFriendActivity extends BaseActivity {
             case R.id.iv_sina:
                 hud = Utils.createAutoHud(this);
                 SinaWeibo.ShareParams spSina = new SinaWeibo.ShareParams();
-                spSina.setText("小强单车 http://bike.estronger.cn/");
+                spSina.setText("http://bike.e-stronger.com/bike/wechat/shareCoupon.html?encryptCode=" +
+                        PrefUtils.getString(this, "encryptCode", "null"));
                 spSina.setImageUrl(NetConstant.IMG_URL);
                 Platform weibo = ShareSDK.getPlatform(this, SinaWeibo.NAME);
                 weibo.setPlatformActionListener(paListener); // 设置分享事件回调
@@ -120,7 +129,8 @@ public class InviteFriendActivity extends BaseActivity {
                 spWx.setTitle("小强单车");
                 spWx.setText("扫码骑行，告别堵心");
                 spWx.setImageUrl(NetConstant.IMG_URL);
-                spWx.setUrl("http://bike.estronger.cn/");
+                spWx.setUrl("http://bike.e-stronger.com/bike/wechat/shareCoupon.html?encryptCode=" +
+                        PrefUtils.getString(this, "encryptCode", "null"));
                 Platform wx = ShareSDK.getPlatform(Wechat.NAME);
                 wx.setPlatformActionListener(paListener); // 设置分享事件回调
                 // 执行图文分享
@@ -133,7 +143,8 @@ public class InviteFriendActivity extends BaseActivity {
                 spWxM.setTitle("小强单车");
                 spWxM.setText("扫码骑行，告别堵心");
                 spWxM.setImageUrl(NetConstant.IMG_URL);
-                spWxM.setUrl("http://bike.estronger.cn/");
+                spWxM.setUrl("http://bike.e-stronger.com/bike/wechat/shareCoupon.html?encryptCode=" +
+                        PrefUtils.getString(this, "encryptCode", "null"));
                 Platform wxM = ShareSDK.getPlatform(WechatMoments.NAME);
                 wxM.setPlatformActionListener(paListener); // 设置分享事件回调
                 // 执行图文分享
@@ -191,6 +202,30 @@ public class InviteFriendActivity extends BaseActivity {
         super.onPause();
         if (hud != null && hud.isShowing()) {
             hud.dismiss();
+        }
+    }
+
+    @Override
+    public void onSuccess(String result, int whereRequest) {
+        switch (whereRequest) {
+            case Connect.GET_ENCRYPT_CODE:
+                if (getCode(result) == 0) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(result);
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        PrefUtils.setString(InviteFriendActivity.this, "encryptCode", data.getString("encrypt_code"));
+                    } catch (Exception e) {
+                    }
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onError(String errorMsg, int whereRequest) {
+        switch (whereRequest) {
+            case Connect.GET_ENCRYPT_CODE:
+                break;
         }
     }
 }

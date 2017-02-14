@@ -47,6 +47,7 @@
                 style="@style/RlFneLeiStyle">
 
                 <TextView
+                    android:layout_centerHorizontal="true"
                     android:id="@+id/tv_all"
                     style="@style/TvFneLeiStyle"
                     android:text="全部" />

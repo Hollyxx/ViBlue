@@ -19,9 +19,9 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="8dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="13dp"
             android:src="@drawable/back_ic_seletor" />
 
         <TextView
@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/iv_share"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:layout_alignParentRight="true"
             android:padding="10dp"
             android:src="@mipmap/ridden_ic_share" />
@@ -84,10 +84,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#282828"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="18dp"
                     android:gravity="center"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
+                    android:textColor="#333333"
                     android:text="骑行距离"/>
 
                 <LinearLayout
@@ -130,14 +130,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="自行车编号"
-                        android:textColor="#1f1f1f" />
+                        android:textSize="13sp"
+                        android:textColor="#333333"/>
 
                     <TextView
                         android:id="@+id/tv_bike_sn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:textColor="#1f1f1f" />
+                        android:textSize="13sp"
+                        android:textColor="#333333" />
                 </LinearLayout>
 
                 <View
@@ -171,8 +173,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="骑行时间(min)"
-                                android:textColor="#282828"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:textColor="#333333" />
 
                             <TextView
                                 android:id="@+id/tv_ride_time"
@@ -207,8 +209,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="节约碳排量(g)"
-                                android:textColor="#282828"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:textColor="#333333" />
 
                             <TextView
                                 android:id="@+id/tv_tan"
@@ -243,8 +245,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="卡路里(kcall)"
-                                android:textColor="#282828"
-                                android:textSize="13sp" />
+                                android:textSize="13sp"
+                                android:textColor="#333333" />
 
                             <TextView
                                 android:id="@+id/tv_kll"
@@ -277,8 +279,8 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:text="需要帮助"
-                    android:textColor="#696969"
-                    android:textSize="14sp" />
+                    android:textColor="#666666"
+                    android:textSize="13sp" />
 
                 <View
                     android:layout_width="0.3dp"
@@ -292,8 +294,8 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:text="分享行程"
-                    android:textColor="#696969"
-                    android:textSize="14sp" />
+                    android:textColor="#666666"
+                    android:textSize="13sp" />
 
             </LinearLayout>
 

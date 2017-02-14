@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
@@ -43,6 +44,7 @@ import permissions.dispatcher.RuntimePermissions;
 
 import com.tools.SystemTools;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
@@ -77,6 +79,7 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
     private String content = "";
     private boolean hasPic = false,hasPerm=true;
     private MyDialog myDialog;
+    private ImageOptions imageOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,7 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
         x.image().bind(iv_add, "assets://ridden_btn_add.png");
         iv_back.setOnClickListener(this);
         iv_add.setOnClickListener(this);
+        iv_bg.setOnClickListener(this);
         btn_ok.setOnClickListener(this);
         poUtil = new PopWindowUtil(this);
         poUtil.initPopWindow(this);
@@ -115,6 +119,9 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
             }
         });
         resetSendMsgRl();
+        imageOptions = new ImageOptions.Builder()
+                .setUseMemCache(false)
+                .build();
     }
 
     @Override
@@ -124,6 +131,17 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.iv_add:
+                if(Utils.isCameraPermission()){
+                    if (hasPerm){
+                        poUtil.showPopWindow(ll_contanier);
+                    }else {
+                        ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
+                    }
+                }else {
+                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
+                }
+                break;
+            case R.id.iv_bg:
                 if(Utils.isCameraPermission()){
                     if (hasPerm){
                         poUtil.showPopWindow(ll_contanier);
@@ -159,14 +177,14 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
         if (arg1 == RESULT_OK) {
             switch (arg0) {
                 case OpenCameraActivity.TAKE_PICTURE_CODE:
-                    SystemTools.cropImageUri(this, SystemTools.imageUri, 500, 500,
+                    SystemTools.cropImageUri(this, SystemTools.imageUri, 800, 500,
                             "park.jpg");
                     break;
                 case SystemTools.FROM_PHOTO_CODE:
                     if (arg2 != null) {
                         try {
                             Uri selectedImage = arg2.getData();
-                            SystemTools.cropImageUri(this, selectedImage, 500, 500,
+                            SystemTools.cropImageUri(this, selectedImage, 800, 500,
                                     "park.jpg");
                         } catch (Exception e) {
                         }
@@ -176,7 +194,8 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
                     if (arg2 != null) {
                         try {
                             hasPic = true;
-                            x.image().bind(iv_bg, new File(SystemTools.HEAD_PATH).toURI().toString());
+                            iv_add.setVisibility(View.INVISIBLE);
+                            x.image().bind(iv_bg, new File(SystemTools.HEAD_PATH).toURI().toString(),imageOptions);
                         } catch (Exception e) {
                         }
                     }
@@ -270,5 +289,11 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
             case Connect.ADD_NORMAL_PARKING:
                 break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        ParkingPhotoActivity.this.finish();
+        return super.onKeyDown(keyCode, event);
     }
 }

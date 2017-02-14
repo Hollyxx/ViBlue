@@ -204,7 +204,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                         rl_certification.setClickable(true);
                         iv_certification.setVisibility(View.VISIBLE);
                     }
-                    tv_phone.setText(data.getMobile());
+                    tv_phone.setText(data.getMobile().replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2"));
                 }
                 break;
             case Connect.UPDATE_AVATAR:

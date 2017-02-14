@@ -17,14 +17,18 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.estronger.bike.R;
+import cn.estronger.bike.adapter.MyHistroyCouponAdapter;
 import cn.estronger.bike.adapter.MyWalletDetailAdapter;
 import cn.estronger.bike.application.SysApplication;
+import cn.estronger.bike.bean.CouponHistroy;
 import cn.estronger.bike.bean.WalletDetail;
 import cn.estronger.bike.connect.Connect;
 import cn.estronger.bike.utils.MyHttpUtils;
 
+import static android.R.attr.data;
 import static cn.estronger.bike.R.id.iv_back;
 
 
@@ -39,8 +43,8 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
     RelativeLayout rl_empty;
     @ViewInject(R.id.view_header)
     LinearLayout view_header;
-    private MyWalletDetailAdapter mAdapter;
-    private ArrayList<WalletDetail.DataBean.ItemsBean> listData;
+    private MyHistroyCouponAdapter mAdapter;
+    private ArrayList<CouponHistroy.DataBean.ItemsBean> listData;
     private int page=1,total_page,isOnRefresh=1;
 
     @Override
@@ -58,7 +62,7 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
 
     private void init() {
         SysApplication.getInstance().addActivity(this);
-        Connect.getWalletDetailPb(this,page+"",this);
+        Connect.getExpiredList(this,page+"",this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -71,21 +75,21 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
             public void onRefresh() {
                 page=1;
                 isOnRefresh=2;
-                Connect.getWalletDetail(CouponHistoryActivity.this,"1",CouponHistoryActivity.this);
+                Connect.getExpiredListNoPb(CouponHistoryActivity.this,"1",CouponHistoryActivity.this);
             }
 
             @Override
             public void onLoadMore() {
                 if (total_page-page>0){
                     page++;
-                    Connect.getWalletDetail(CouponHistoryActivity.this,page+"",CouponHistoryActivity.this);
+                    Connect.getExpiredListNoPb(CouponHistoryActivity.this,page+"",CouponHistoryActivity.this);
                 }else {
                     mRecyclerView.loadMoreComplete();
                 }
             }
         });
-        listData = new ArrayList<WalletDetail.DataBean.ItemsBean>();
-        mAdapter = new MyWalletDetailAdapter(listData);
+        listData = new ArrayList<CouponHistroy.DataBean.ItemsBean>();
+        mAdapter = new MyHistroyCouponAdapter(listData);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -96,7 +100,7 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
                 finish();
                 break;
             case R.id.tv_info:
-                startActivity(new Intent(CouponHistoryActivity.this,WebViewActivity.class).putExtra("title","押金说明"));
+                startActivity(new Intent(CouponHistoryActivity.this,WebViewActivity.class).putExtra("title","优惠券使用规则"));
                 break;
             default:
                 break;
@@ -110,10 +114,10 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
             return;
         }
         switch (whereRequest) {
-            case Connect.GET_WALLET_DETAIL:
+            case Connect.GET_EXPIRED_LIST:
                 if (getCode(result) == 0) {
-                    WalletDetail reditCount= new Gson().fromJson(result, WalletDetail.class);
-                    WalletDetail.DataBean data=reditCount.getData();
+                    CouponHistroy couponHistroy= new Gson().fromJson(result, CouponHistroy.class);
+                    CouponHistroy.DataBean data= couponHistroy.getData();
                     total_page=data.getTotal_pages();
                     if (isOnRefresh==2){
                         listData.clear();
@@ -131,7 +135,7 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
     @Override
     public void onError(String errorMsg, int whereRequest) {
         switch (whereRequest) {
-            case Connect.GET_WALLET_DETAIL:
+            case Connect.GET_EXPIRED_LIST:
                 break;
         }
     }

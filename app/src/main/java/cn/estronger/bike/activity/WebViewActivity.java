@@ -1,5 +1,6 @@
 package cn.estronger.bike.activity;
 
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -27,7 +28,7 @@ public class WebViewActivity extends BaseActivity {
     TextView tv_title;
     @ViewInject(R.id.wv_web)
     WebView wv_web;
-    private KProgressHUD hud;
+    private Dialog hud;
     @ViewInject(R.id.view_header)
     LinearLayout view_header;
 
@@ -166,6 +167,12 @@ public class WebViewActivity extends BaseActivity {
                 case "信用分太低了会怎么样":
                     loadUrl(PrefUtils.getString(WebViewActivity.this,"37",""));
                     break;
+                case "退款说明":
+                    loadUrl(PrefUtils.getString(WebViewActivity.this,"38",""));
+                    break;
+                case "优惠券使用规则":
+                    loadUrl(PrefUtils.getString(WebViewActivity.this,"40",""));
+                    break;
                 case "消息详情":
                     loadUrl(getIntent().getStringExtra("url"));
                     break;
@@ -182,7 +189,7 @@ public class WebViewActivity extends BaseActivity {
     public void loadUrl(String url) {
         if (wv_web != null) {
             wv_web.loadUrl(url);
-            hud = Utils.createHud(this);
+            hud = Utils.createLoadingDialog(this);
             wv_web.reload();
         }
     }

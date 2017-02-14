@@ -8,10 +8,10 @@
 
         <ImageView
             android:id="@+id/iv_home_head"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:layout_marginLeft="5dp"
-            android:padding="8dp"
+            android:padding="10dp"
             android:src="@mipmap/home_user_head" />
 
         <ImageView
@@ -21,11 +21,11 @@
 
         <ImageView
             android:id="@+id/iv_home_seach"
-            android:layout_width="40dp"
+            android:layout_width="44dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_marginRight="5dp"
-            android:padding="8dp"
+            android:padding="10dp"
             android:src="@drawable/home_btn_seach_seletor" />
     </RelativeLayout>
 </RelativeLayout>

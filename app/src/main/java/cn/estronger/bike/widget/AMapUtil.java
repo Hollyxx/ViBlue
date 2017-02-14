@@ -62,27 +62,36 @@ public class AMapUtil {
 		if (lenMeter > 10000) // 10 km
 		{
 			int dis = lenMeter / 1000;
-			return dis + ChString.Kilometer;
+			return dis+"";
 		}
 
 		if (lenMeter > 1000) {
 			float dis = (float) lenMeter / 1000;
 			DecimalFormat fnum = new DecimalFormat("##0.0");
 			String dstr = fnum.format(dis);
-			return dstr + ChString.Kilometer;
+			return dstr + "";
 		}
 
+//		if (lenMeter > 100) {
+//			int dis = lenMeter / 50 * 50;
+//			dis=dis/1000;
+//			return dis + "";
+//		}
 		if (lenMeter > 100) {
-			int dis = lenMeter / 50 * 50;
-			return dis + ChString.Meter;
+			float dis = (float) lenMeter / 1000;
+			DecimalFormat fnum = new DecimalFormat("##0.0");
+			String dstr = fnum.format(dis);
+			return dstr + "";
 		}
 
-		int dis = lenMeter / 10 * 10;
-		if (dis == 0) {
-			dis = 10;
-		}
-
-		return dis + ChString.Meter;
+//		int dis = lenMeter / 10 * 10;
+//		if (dis == 0) {
+//			dis = 10;
+//		}
+		float dis = (float) lenMeter / 1000;
+		DecimalFormat fnum = new DecimalFormat("##0.00");
+		String dstr = fnum.format(dis);
+		return dstr + "";
 	}
 
 	public static boolean IsEmptyOrNullString(String s) {

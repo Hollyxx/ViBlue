@@ -1,6 +1,7 @@
 package cn.estronger.bike.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -14,17 +15,22 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.iflytek.thirdparty.C;
+import android.app.ActivityManager.RunningAppProcessInfo;
 
 import cn.estronger.bike.R;
 import cn.estronger.bike.application.SysApplication;
 import cn.estronger.bike.utils.PrefUtils;
+import cn.estronger.bike.utils.ToastUtil;
 import cn.estronger.bike.utils.ToastUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static cn.estronger.bike.activity.MainActivity.mlocationClient;
 
 /**
  * Created by MrLv on 2016/12/5.
@@ -32,6 +38,7 @@ import java.util.TimerTask;
 
 public abstract class BaseActivity extends AppCompatActivity {
     public static int height,width;
+    public boolean isForeground = false;
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,5 +139,49 @@ public abstract class BaseActivity extends AppCompatActivity {
         SysApplication.getInstance().exit();//关闭整个程序
         startActivity(new Intent(context,PhoneNumVerifyActivity.class).putExtra("from","relogin"));
         PrefUtils.clear(context);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isForeground == false) {
+            isForeground = true;
+            //OnResume()方法中判断App是否进入前台，如果进入前台就做自己想要的操作。
+            MainActivity.mlocationClient.startLocation();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        if (!isAppOnForeground()) {
+            isForeground = false;
+            //在Activity生命周期中的onPause()中判断是否进入后台
+            MainActivity.mlocationClient.stopLocation();
+//        }
+    }
+
+    /**
+     * 程序是否在前台运行
+     *
+     * @return
+     */
+    public static boolean isApplicationShowing(String packageName,Context context) {
+        boolean result = false;
+        ActivityManager am = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<RunningAppProcessInfo> appProcesses = am.getRunningAppProcesses();
+        if (appProcesses != null) {
+            for (RunningAppProcessInfo runningAppProcessInfo : appProcesses) {
+                if (runningAppProcessInfo.processName.equals(packageName)) {
+                    int status = runningAppProcessInfo.importance;
+                    if (status == RunningAppProcessInfo.IMPORTANCE_VISIBLE
+                            || status == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                        result = true;
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

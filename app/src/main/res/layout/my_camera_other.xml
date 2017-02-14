@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         app:inner_width="220dp"
         app:inner_height="220dp"
-        app:inner_margintop="200dp"
+        app:inner_margintop="220dp"
         app:inner_corner_color="@color/green_color"
         app:inner_corner_length="20dp"
         app:inner_corner_width="2dp"
@@ -28,7 +28,7 @@
         android:text="扫描车上二维码"
         android:textColor="#ffffff"
         android:layout_width="match_parent"
-        android:layout_marginTop="430dp"
+        android:layout_marginTop="450dp"
         android:gravity="center"
         android:layout_height="wrap_content" />
 

@@ -16,7 +16,7 @@
             android:id="@+id/iv_lock"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:src="@mipmap/reserve_ic_add" />
 
         <TextView
@@ -38,7 +38,9 @@
             android:textColor="@color/green_color" />
     </RelativeLayout>
 
-    <View style="@style/line" />
+    <View style="@style/line"
+        android:background="#666666"
+        android:layout_height="0.4dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="每小时"
+                android:text="每半小时"
                 android:textColor="#ffffff"
                 android:textSize="16sp" />
 
@@ -93,7 +95,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="8dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -140,7 +142,7 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="2dp"
                 android:layout_marginLeft="8dp"
-                android:text="米"
+                android:text="Km"
                 android:textColor="#ffffff"
                 android:textSize="12sp" />
         </LinearLayout>

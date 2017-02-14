@@ -1,5 +1,6 @@
 package cn.estronger.bike.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 
@@ -28,12 +29,14 @@ public class MyHttpUtils {
      * @return
      */
     public static void xutilsGet(Context context,final int whereRequest, String url, HashMap<String, String> map, final MyHttpCallback callback) {
-        final KProgressHUD hud = KProgressHUD.create(context)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setWindowColor(Color.parseColor("#828282"))
-                .setLabel("L O A D I N G")
-                .setCancellable(false)
-                .show();
+//        final KProgressHUD hud = KProgressHUD.create(context)
+//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+//                .setWindowColor(Color.parseColor("#828282"))
+//                .setLabel("L O A D I N G")
+//                .setCancellable(false)
+//                .show();
+        final Dialog hud =Utils.createLoadingDialog(context);
+        hud.show();
         RequestParams params = new RequestParams(url);
         for (String key : map.keySet()) {
             String value = map.get(key);
@@ -73,12 +76,14 @@ public class MyHttpUtils {
      * @param callback     回调方法
      */
     public static void xutilsPost(Context context, final int whereRequest, String url, HashMap<String, String> map, final MyHttpCallback callback) {
-        final KProgressHUD hud = KProgressHUD.create(context)//把progressBar写在这里的话  就省去了再activity写很多的麻烦
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setWindowColor(Color.parseColor("#828282"))
-                .setLabel("L O A D I N G")
-                .setCancellable(false)
-                .show();
+//        final KProgressHUD hud = KProgressHUD.create(context)//把progressBar写在这里的话  就省去了再activity写很多的麻烦
+//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+//                .setWindowColor(Color.parseColor("#828282"))
+//                .setLabel("L O A D I N G")
+//                .setCancellable(false)
+//                .show();
+        final Dialog hud =Utils.createLoadingDialog(context);
+        hud.show();
         RequestParams params = new RequestParams(url);
         for (String key : map.keySet()) {
             String value = map.get(key);
@@ -114,12 +119,14 @@ public class MyHttpUtils {
 
 
     public static void xutilsPostUpload(Context context, final int whereRequest, String url, HashMap<String, String> map,String cname,String filename ,final MyHttpCallback callback) {
-        final KProgressHUD hud = KProgressHUD.create(context)//把progressBar写在这里的话  就省去了再activity写很多的麻烦
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setWindowColor(Color.parseColor("#828282"))
-                .setLabel("L O A D I N G")
-                .setCancellable(false)
-                .show();
+//        final KProgressHUD hud = KProgressHUD.create(context)//把progressBar写在这里的话  就省去了再activity写很多的麻烦
+//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+//                .setWindowColor(Color.parseColor("#828282"))
+//                .setLabel("L O A D I N G")
+//                .setCancellable(false)
+//                .show();
+        final Dialog hud =Utils.createLoadingDialog(context);
+        hud.show();
         RequestParams params = new RequestParams(url);
         for (String key : map.keySet()) {
             String value = map.get(key);

@@ -56,6 +56,11 @@ public class Connect {
     public static final int ADD_FAULT = 33;
     public static final int ADD_ILLEGAL_PARKING = 34;
     public static final int ADD_NORMAL_PARKING = 35;
+    public static final int CONTACT = 36;
+    public static final int VERSION = 37;
+    public static final int GET_EXPIRED_LIST = 38;
+    public static final int GET_COUPON_LIST = 39;
+    public static final int GET_ENCRYPT_CODE = 40;
 
     /**
      * 开锁指令
@@ -645,6 +650,60 @@ public class Connect {
         map.put("bicycle_sn", bicycle_sn);
         map.put("content", content);
         MyHttpUtils.xutilsPostUpload(context, ADD_NORMAL_PARKING, NetConstant.ADD_NORMAL_PARKING, map, "parking_image", upfile, callback);
+    }
+    /**
+     * 获取联系方式
+     * @param context
+     * @param callback
+     */
+    public static void getContact(Context context,MyHttpUtils.MyHttpCallback callback) {
+        HashMap map = new HashMap<String, String>();
+        MyHttpUtils.xutilsPost(context, CONTACT, NetConstant.CONTACT, map, callback);
+    }
+
+    public static void getExpiredList(Context context, String page, MyHttpUtils.MyHttpCallback callback) {
+        HashMap map = new HashMap<String, String>();
+        map.put("user_id", PrefUtils.getString(context, "user_id", "-1"));
+        map.put("sign", MD5.md5(PrefUtils.getString(context, "user_id", "-1") + SystemTools.getPhoneId()));
+        map.put("page", page);
+        MyHttpUtils.xutilsPost(context, GET_EXPIRED_LIST, NetConstant.GET_EXPIRED_LIST, map, callback);
+    }
+
+    public static void getExpiredListNoPb(Context context, String page, MyHttpUtils.MyHttpCallback callback) {
+        HashMap map = new HashMap<String, String>();
+        map.put("user_id", PrefUtils.getString(context, "user_id", "-1"));
+        map.put("sign", MD5.md5(PrefUtils.getString(context, "user_id", "-1") + SystemTools.getPhoneId()));
+        map.put("page", page);
+        MyHttpUtils.xutilsPostNoPb(GET_EXPIRED_LIST, NetConstant.GET_EXPIRED_LIST, map, callback);
+    }
+
+    public static void getCouponList(Context context, String page, MyHttpUtils.MyHttpCallback callback) {
+        HashMap map = new HashMap<String, String>();
+        map.put("user_id", PrefUtils.getString(context, "user_id", "-1"));
+        map.put("sign", MD5.md5(PrefUtils.getString(context, "user_id", "-1") + SystemTools.getPhoneId()));
+        map.put("page", page);
+        MyHttpUtils.xutilsPost(context, GET_COUPON_LIST, NetConstant.GET_COUPON_LIST, map, callback);
+    }
+
+    /**
+     * 获取优惠券列表
+     * @param context
+     * @param page
+     * @param callback
+     */
+    public static void getCouponListNoPb(Context context, String page, MyHttpUtils.MyHttpCallback callback) {
+        HashMap map = new HashMap<String, String>();
+        map.put("user_id", PrefUtils.getString(context, "user_id", "-1"));
+        map.put("sign", MD5.md5(PrefUtils.getString(context, "user_id", "-1") + SystemTools.getPhoneId()));
+        map.put("page", page);
+        MyHttpUtils.xutilsPostNoPb(GET_COUPON_LIST, NetConstant.GET_COUPON_LIST, map, callback);
+    }
+
+    public static void getEncryptCode(Context context,  MyHttpUtils.MyHttpCallback callback) {
+        HashMap map = new HashMap<String, String>();
+        map.put("user_id", PrefUtils.getString(context, "user_id", "-1"));
+        map.put("sign", MD5.md5(PrefUtils.getString(context, "user_id", "-1") + SystemTools.getPhoneId()));
+        MyHttpUtils.xutilsPost(context,GET_ENCRYPT_CODE, NetConstant.GET_ENCRYPT_CODE, map, callback);
     }
 
 }

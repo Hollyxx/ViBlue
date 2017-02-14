@@ -156,11 +156,30 @@ public interface NetConstant {
     /**
      *骑行完成
      */
-    String SHARE_NOW="http://bike.e-stronger.com/bike/wechat/myTripNow.html?";
+    String SHARE_NOW="http://bike.e-stronger.com/bike/wechat/myTripShare.html?";
     /**
      *行程分享
      */
-    String SHARE="http://bike.e-stronger.com/bike/wechat/myTripInfo.html?";
-
+    String SHARE="http://bike.e-stronger.com/bike/wechat/myTripShare.html?";
+    /**
+     *停车拍照
+     */
+    String CONTACT=SERVER_URL+"api/index.php?route=system/common/contact";
+    /**
+     *获取最新的安卓版本信息
+     */
+    String VERSION=SERVER_URL+"api/index.php?route=system/common/version";
+    /**
+     *获取历史优惠券列表
+     */
+    String GET_EXPIRED_LIST=SERVER_URL+"api/index.php?route=account/coupon/getExpiredList";
+    /**
+     *获取可用史优惠券列表
+     */
+    String GET_COUPON_LIST=SERVER_URL+"api/index.php?route=account/coupon/getCouponList";
+    /**
+     *获取分享的加密内容
+     */
+    String GET_ENCRYPT_CODE=SERVER_URL+"api/index.php?route=account/account/getEncryptCode";
 
  }

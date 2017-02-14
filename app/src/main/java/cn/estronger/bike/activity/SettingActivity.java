@@ -1,6 +1,9 @@
 package cn.estronger.bike.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -14,11 +17,20 @@ import cn.estronger.bike.application.SysApplication;
 import cn.estronger.bike.connect.Connect;
 import cn.estronger.bike.utils.MyHttpUtils;
 import cn.estronger.bike.utils.PrefUtils;
+import cn.estronger.bike.utils.ToastUtils;
 import cn.estronger.bike.widget.MyDialog;
 import cn.estronger.bike.utils.PopWindowUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.lzh.framework.updatepluginlib.UpdateBuilder;
+import org.lzh.framework.updatepluginlib.model.DefaultChecker;
+import org.lzh.framework.updatepluginlib.model.Update;
+import org.lzh.framework.updatepluginlib.strategy.UpdateStrategy;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
+
+import static cn.estronger.bike.R.id.ci_head_img;
 
 /**
  * Created by MrLv on 2016/12/12.
@@ -95,6 +107,25 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(new Intent(SettingActivity.this,WebViewActivity.class).putExtra("title","消费协议"));
                 break;
             case R.id.rl_update:
+                UpdateBuilder.create().strategy(new UpdateStrategy() {
+                    @Override
+                    public boolean isShowUpdateDialog(Update update) {
+                        // 有新更新直接展示
+                        return true;
+                    }
+
+                    @Override
+                    public boolean isAutoInstall() {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean isShowDownloadDialog() {
+                        // 展示下载进度
+                        return true;
+                    }
+                }).check(SettingActivity.this);
+//                Connect.getVersion(this,this);
                 break;
             case R.id.rl_about_us:
                 startActivity(new Intent(SettingActivity.this,AboutUsActivity.class));
@@ -126,6 +157,20 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                     finish();
                 }
                 break;
+            case Connect.VERSION:
+                if (getCode(result) == 0) {
+                    try {
+                        getVersionCode(SettingActivity.this);
+                        JSONObject object = new JSONObject(result);
+                        if (getVersionCode(SettingActivity.this)<object.getJSONObject("data").getInt("version_code")){
+
+                        }else {
+                            ToastUtils.showShort(SettingActivity.this,"你已经是最新版本");
+                        }
+                    } catch (JSONException e) {
+                    }
+                }
+                break;
         }
     }
 
@@ -135,5 +180,23 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case Connect.LOG_OUT:
                 break;
         }
+    }
+
+    /**
+     * get App versionCode
+     * @param context
+     * @return
+     */
+    public int getVersionCode(Context context){
+        PackageManager packageManager=context.getPackageManager();
+        PackageInfo packageInfo;
+        int versionCode=0;
+        try {
+            packageInfo=packageManager.getPackageInfo(context.getPackageName(),0);
+            versionCode=packageInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionCode;
     }
 }

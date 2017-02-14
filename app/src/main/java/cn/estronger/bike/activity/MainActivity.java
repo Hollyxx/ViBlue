@@ -2,6 +2,7 @@ package cn.estronger.bike.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -154,13 +155,13 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
 
     private AMap aMap;
     private OnLocationChangedListener mListener;
-    private AMapLocationClient mlocationClient;
+    public static AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
     private PopWindowSrevice popSrevice;
     private boolean isFirstLoc = false, registed = false;
     private SensorEventHelper mSensorHelper;
     private Marker mLocMarker, marker123;
-    public static double mLat, mLng, clat, clng, blat, blng;//写出public  是为了其他类里面可以直接使用
+    public static double mLat, mLng, clat, clng, blat, blng, llat = 0.0, llng = 0.0;//写出public  是为了其他类里面可以直接使用
     private float zoom;
     private int type, mid, status = 1;//status 1是初始状态  2点了marker还没有预约   3已预约   4正在骑行中
     private String addr, bicycle_sn, order_sn, device_id, scenic_spot_name, user_id, state, markerId;//
@@ -171,7 +172,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
     private RouteSearch routeSearch;
     private WalkRouteResult mWalkRouteResult;
     private WalkRouteOverlay walkRouteOverlay;
-    private KProgressHUD hud;
+    private Dialog hud;
     private Timer timer;
     private TimerTask task;
     private Handler handler;
@@ -288,9 +289,16 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        if (!Utils.isNetworkAvailable(this)){//判断当前网络是否可用
+            myDialog = new MyDialog();
+            myDialog.showNoticeDialog(this, "当前网络差或不可用，请检查手机网络！", this,false);
+            myDialog.show();
+            return true;
+        }
         if (marker.getId() != markerId) {
             if (status != 3 && status != 4) {
-                hud = Utils.createHud(MainActivity.this);
+                hud = Utils.createLoadingDialog(MainActivity.this);
+                hud.show();
                 if (!markerId.equals(marker.getId())) {
                     blat = marker.getPosition().latitude;
                     blng = marker.getPosition().longitude;
@@ -302,6 +310,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                         setOrderOneStep(object);
                     } catch (Exception e) {
                     }
+//                    RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(new LatLonPoint(llat==0.0?clat:llat, llng==0.0?clng:llng), new LatLonPoint(marker.getPosition().latitude, marker.getPosition().longitude));
                     RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(new LatLonPoint(clat, clng), new LatLonPoint(marker.getPosition().latitude, marker.getPosition().longitude));
                     RouteSearch.WalkRouteQuery query = new RouteSearch.WalkRouteQuery(fromAndTo, RouteSearch.WalkDefault);
                     routeSearch.calculateWalkRouteAsyn(query);// 异步路径规划步行模式查询
@@ -328,8 +337,11 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                 walkRouteOverlay.removeFromMap();
                 walkRouteOverlay.addToMap();
                 walkRouteOverlay.zoomToSpan();//移动地图 到可是路径规划
-                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_length, (int) walkPath.getDistance() + "");
+//                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_length, (int) walkPath.getDistance() + "");
+                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_length, AMapUtil.getFriendlyLength((int) walkPath.getDistance()));
                 ViewTools.setStringToTextView(MainActivity.this, R.id.tv_time, AMapUtil.getFriendlyTime((int) walkPath.getDuration()));
+//                llat=clat;
+//                llng=clng;
             }
         }
     }
@@ -410,8 +422,6 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         ViewTools.setGone(MainActivity.this, R.id.ib_zxing);//隐藏扫码按钮
         ViewTools.setGone(MainActivity.this, R.id.ll_ordering);//隐藏预约中界面
         ViewTools.setGone(MainActivity.this, R.id.iv_position);//隐藏地图中间的大头针
-        ib_service.setEnabled(false);//设置客户服务按钮不可点
-        iv_home_head.setEnabled(false);//个人中心按钮不可点
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//设置不可滑出侧滑菜单
         sendHandlerEveryMin();
         if (walkRouteOverlay != null) {
@@ -427,8 +437,6 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         ViewTools.setGone(MainActivity.this, R.id.ll_runing);//隐藏计费界面
         ViewTools.setVisible(MainActivity.this, R.id.ib_zxing);//显示扫码按钮
         ViewTools.setVisible(MainActivity.this, R.id.iv_position);//显示大头针
-        ib_service.setEnabled(true);//设置客户服务按钮可点
-        iv_home_head.setEnabled(true);//个人中心按钮可点
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
     }
 
@@ -454,9 +462,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         }
         ViewTools.setVisible(MainActivity.this, R.id.ll_start_order);
         ViewTools.setGone(MainActivity.this, R.id.iv_position);//隐藏地图中间的大头针
-        ib_service.setEnabled(false);//设置客户服务按钮不可点
         ib_zxing.setEnabled(false);//设置客户服务按钮不可点
-        iv_home_head.setEnabled(false);//个人中心按钮不可点
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//设置不可滑出侧滑菜单
     }
 
@@ -469,8 +475,9 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         ViewTools.setGone(MainActivity.this, R.id.ll_ordering);
         ViewTools.setVisible(MainActivity.this, R.id.iv_position);
         ib_zxing.setEnabled(true);//设置扫码按钮可点
-        ib_service.setEnabled(true);//设置客户服务按钮可点
-        iv_home_head.setEnabled(true);//个人中心按钮可点
+        iv_home_seach.setEnabled(true);//搜索按钮可点
+//        llat=0.0;
+//        llng=0.0;
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
         ViewTools.setVisible(MainActivity.this, R.id.iv_position);//显示地图中间的大头针
         if (walkRouteOverlay != null) {
@@ -485,10 +492,8 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         status = 3; // 预约中
         ViewTools.setGone(MainActivity.this, R.id.ll_start_order);
         ViewTools.setVisible(MainActivity.this, R.id.ll_ordering);
-        ib_service.setEnabled(false);//设置客户服务按钮不可点
         ib_zxing.setEnabled(true);//设置搜索按钮可点
-        iv_home_seach.setEnabled(false);//搜索按钮不可点
-        iv_home_head.setEnabled(false);//个人中心按钮不可点
+//        iv_home_seach.setEnabled(false);//搜索按钮不可点
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//设置不可滑出侧滑菜单
         ViewTools.setStringToTextView(MainActivity.this, R.id.tv_scenic_spot_name, scenic_spot_name);
         ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_sn, result.getData().getBicycle_sn());
@@ -503,9 +508,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         status = 3; // 预约中
         ViewTools.setGone(MainActivity.this, R.id.ll_start_order);
         ViewTools.setVisible(MainActivity.this, R.id.ll_ordering);
-        ib_service.setEnabled(false);//设置客户服务按钮不可点
         ib_zxing.setEnabled(true);//设置搜索按钮可点
-        iv_home_head.setEnabled(false);//个人中心按钮不可点
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//设置不可滑出侧滑菜单
         ViewTools.setStringToTextView(MainActivity.this, R.id.tv_scenic_spot_name, scenic_spot_name);
         ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_sn, result.getData().getCurrent_order().getBicycle_sn());
@@ -538,6 +541,9 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                     Connect.cancelBook(MainActivity.this, order_sn, MainActivity.this);
                 }
                 break;
+            case R.id.ok_btn:
+                myDialog.dismiss();
+                break;
         }
     }
 
@@ -547,6 +553,12 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
             R.id.ll_my_route, R.id.btn_cancel_order, R.id.btn_order_nav,
             R.id.ll_my_msg, R.id.ll_invite_friend, R.id.ll_user_guide, R.id.ll_setting, R.id.ll_order_one, R.id.rl_bell})
     private void onEventClick(View v) {
+        if (!Utils.isNetworkAvailable(this)){//判断当前网络是否可用
+            myDialog = new MyDialog();
+            myDialog.showNoticeDialog(this, "当前网络差或不可用，请检查手机网络！", this,false);
+            myDialog.show();
+            return;
+        }
         Intent intent = null;
         switch (v.getId()) {
             case R.id.rl_all:
@@ -565,8 +577,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                 setOrderOneStepExit();
                 break;
             case R.id.btn_order_one:
-                //判断 有没有登录
-                if ("-1".equals(MyApp.userId)) {
+                if ("-1".equals(MyApp.userId)) {//判断 有没有登录
                     startActivity(new Intent(MainActivity.this, PhoneNumVerifyActivity.class));
                     setOrderOneStepExit();
                 } else {
@@ -607,20 +618,28 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                 startActivity(new Intent(MainActivity.this, "-1".equals(MyApp.userId) ? PhoneNumVerifyActivity.class : CreditScoreActivity.class));
                 break;
             case R.id.iv_home_head://侧滑菜单
-                if (mDrawerLayout.isDrawerOpen(findViewById(R.id.dl_menu))) {
-                    mDrawerLayout.closeDrawers();
+                if (status == 1) {
+                    if (mDrawerLayout.isDrawerOpen(findViewById(R.id.dl_menu))) {
+                        mDrawerLayout.closeDrawers();
+                    } else {
+                        mDrawerLayout.openDrawer(Gravity.LEFT);
+                    }
                 } else {
-                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                    ToastUtils.showShort(this, "预约和骑行状态该功能不可用");
                 }
                 break;
             case R.id.ib_zxing://扫码开锁
                 MainActivityPermissionsDispatcher.showCameraWithCheck(this);
                 break;
             case R.id.ib_service://客户服务
-                if ("-1".equals(MyApp.userId)) {
-                    startActivity(new Intent(MainActivity.this, PhoneNumVerifyActivity.class));
+                if (status == 1) {
+                    if ("-1".equals(MyApp.userId)) {
+                        startActivity(new Intent(MainActivity.this, PhoneNumVerifyActivity.class));
+                    } else {
+                        popSrevice.showPopWindow(index_drawerlayout);
+                    }
                 } else {
-                    popSrevice.showPopWindow(index_drawerlayout);
+                    ToastUtils.showShort(this, "预约和骑行状态该功能不可用");
                 }
                 break;
             case R.id.ib_location://定位到现在的位置
@@ -1169,7 +1188,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
     @Override  //请求成功后
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this,result);
+            exitLogin(this, result);
             return;
         }
         switch (whereRequest) {
@@ -1180,7 +1199,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                 }
                 break;
             case Connect.GET_BICYCLE_LOCATION:
-                showMsg(result);
+//                showMsg(result);
                 stopAnim();
                 if (getCode(result) == 0) {
                     MarkerBean markerBean = new Gson().fromJson(result, MarkerBean.class);
@@ -1206,9 +1225,16 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
             case Connect.GET_ORDER_INFO:
                 if (getCode(result) == 0) {
                     CurrentOrder currentOrder = new Gson().fromJson(result, CurrentOrder.class);
-                    ViewTools.setStringToTextView(MainActivity.this, R.id.tv_riding_time,
-                            ("0".equals(currentOrder.getData().getTime().getHours()) ? "" : currentOrder.getData().getTime().getHours()
-                                    + " 时 ") + currentOrder.getData().getTime().getMin());
+                    //判断小时是否为0
+                    if (0 == currentOrder.getData().getTime().getHours()) {
+                        ViewTools.setGone(MainActivity.this, R.id.tv_riding_time_hour);
+                        ViewTools.setGone(MainActivity.this, R.id.tv_hour);
+                    } else {
+                        ViewTools.setVisible(MainActivity.this, R.id.tv_riding_time_hour);
+                        ViewTools.setVisible(MainActivity.this, R.id.tv_hour);
+                        ViewTools.setStringToTextView(MainActivity.this, R.id.tv_riding_time_hour, currentOrder.getData().getTime().getHours() + "");
+                    }
+                    ViewTools.setStringToTextView(MainActivity.this, R.id.tv_riding_time, currentOrder.getData().getTime().getMin() + "");
                     ViewTools.setStringToTextView(MainActivity.this, R.id.tv_riding_bike_num, currentOrder.getData().getBicycle_sn());
                     ViewTools.setStringToTextView(MainActivity.this, R.id.tv_cur_price, currentOrder.getData().getOrder_amount() + "");
                 }

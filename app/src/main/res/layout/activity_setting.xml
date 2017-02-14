@@ -101,7 +101,8 @@
         android:gravity="center">
 
         <TextView
-            style="@style/TvStyle"
+            android:layout_centerInParent="true"
+            style="@style/TvStyle1"
             android:text="退出登录" />
     </RelativeLayout>
 </LinearLayout>
