@@ -63,15 +63,15 @@ public class ModifiNickNameActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.tv_save://保存
                 if (TextUtils.isEmpty(et_nick.getText().toString().trim())){
-                    ToastUtils.showShort(this,"请输入昵称");
+                    ToastUtils.showShort(this,getResources().getText(R.string.Please_enter_a_nickname));
                     return;
                 }
                 if (Validator.isEmoji(et_nick.getText().toString().trim())){
-                    ToastUtils.showShort(this,"昵称不能包含表情");
+                    ToastUtils.showShort(this,getResources().getText(R.string.Nickname_cannot_contain_expression));
                     return;
                 }
                 if (Validator.compileExChar(et_nick.getText().toString().trim())){
-                    ToastUtils.showShort(this,"昵称不能包含符号");
+                    ToastUtils.showShort(this,getResources().getText(R.string.Nickname_cannot_contain_symbol));
                     return;
                 }
                 Connect.updateInfo(ModifiNickNameActivity.this,et_nick.getText().toString().trim(),ModifiNickNameActivity.this);

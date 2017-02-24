@@ -41,6 +41,8 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
     XRecyclerView mRecyclerView;
     @ViewInject(R.id.rl_empty)
     RelativeLayout rl_empty;
+    @ViewInject(R.id.rl_view)
+    RelativeLayout rl_view;
     @ViewInject(R.id.view_header)
     LinearLayout view_header;
     private MyHistroyCouponAdapter mAdapter;
@@ -62,6 +64,7 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
 
     private void init() {
         SysApplication.getInstance().addActivity(this);
+        rl_view.setVisibility(View.GONE);
         Connect.getExpiredList(this,page+"",this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -100,7 +103,7 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
                 finish();
                 break;
             case R.id.tv_info:
-                startActivity(new Intent(CouponHistoryActivity.this,WebViewActivity.class).putExtra("title","优惠券使用规则"));
+                startActivity(new Intent(CouponHistoryActivity.this,BaseWebActivity.class).putExtra("title","优惠券使用规则"));
                 break;
             default:
                 break;
@@ -116,6 +119,7 @@ public class CouponHistoryActivity extends BaseActivity implements MyHttpUtils.M
         switch (whereRequest) {
             case Connect.GET_EXPIRED_LIST:
                 if (getCode(result) == 0) {
+                    rl_view.setVisibility(View.VISIBLE);
                     CouponHistroy couponHistroy= new Gson().fromJson(result, CouponHistroy.class);
                     CouponHistroy.DataBean data= couponHistroy.getData();
                     total_page=data.getTotal_pages();

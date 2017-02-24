@@ -38,7 +38,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_alignParentRight="true"
-            android:padding="10dp"
+            android:padding="13dp"
             android:src="@mipmap/ridden_ic_share" />
     </RelativeLayout>
 
@@ -301,11 +301,22 @@
 
         </LinearLayout>
 
-        <cn.estronger.bike.widget.CircularImage
-            android:id="@+id/ci_header"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+
+        <RelativeLayout
+            android:background="@color/transparent"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/user_avatar_default" />
+            android:layout_width="64dp"
+            android:layout_height="64dp">
+            <cn.estronger.bike.widget.CircularImage
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/dot_white" />
+            <cn.estronger.bike.widget.CircularImage
+                android:layout_centerInParent="true"
+                android:id="@+id/ci_header"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/user_avatar_default" />
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

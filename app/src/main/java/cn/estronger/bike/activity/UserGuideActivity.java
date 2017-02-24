@@ -70,7 +70,7 @@ public class UserGuideActivity extends BaseActivity implements View.OnClickListe
         if ("".equals(PrefUtils.getString(UserGuideActivity.this, "1",""))){
             Connect.index(UserGuideActivity.this, UserGuideActivity.this);
         }
-        tv_title.setText("用户指南");
+        tv_title.setText(getResources().getText(R.string.user_guide));
         iv_back.setOnClickListener(this);
         rl_lock.setOnClickListener(this);
         rl_bike_bug.setOnClickListener(this);
@@ -90,22 +90,22 @@ public class UserGuideActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.rl_lock:
-                startActivity(new Intent(UserGuideActivity.this,WebViewActivity.class).putExtra("title","开不了锁"));
+                startActivity(new Intent(UserGuideActivity.this,BaseWebActivity.class).putExtra("title","开不了锁"));
                 break;
             case R.id.rl_bike_bug:
-                startActivity(new Intent(UserGuideActivity.this,WebViewActivity.class).putExtra("title","发现车辆故障"));
+                startActivity(new Intent(UserGuideActivity.this,BaseWebActivity.class).putExtra("title","发现车辆故障"));
                 break;
             case R.id.rl_top_up_info:
-                startActivity(new Intent(UserGuideActivity.this,WebViewActivity.class).putExtra("title","押金指南"));
+                startActivity(new Intent(UserGuideActivity.this,BaseWebActivity.class).putExtra("title","押金指南"));
                 break;
             case R.id.rl_recharge_info:
-                startActivity(new Intent(UserGuideActivity.this,WebViewActivity.class).putExtra("title","充值说明"));
+                startActivity(new Intent(UserGuideActivity.this,BaseWebActivity.class).putExtra("title","充值说明"));
                 break;
             case R.id.rl_unfind_bike:
-                startActivity(new Intent(UserGuideActivity.this,WebViewActivity.class).putExtra("title","找不到车"));
+                startActivity(new Intent(UserGuideActivity.this,BaseWebActivity.class).putExtra("title","找不到车"));
                 break;
             case R.id.rl_report_prak:
-                startActivity(new Intent(UserGuideActivity.this,WebViewActivity.class).putExtra("title","举报违停"));
+                startActivity(new Intent(UserGuideActivity.this,BaseWebActivity.class).putExtra("title","举报违停"));
                 break;
             case R.id.rl_more:
                 startActivity(new Intent(UserGuideActivity.this,UserGuideMoreActivity.class));

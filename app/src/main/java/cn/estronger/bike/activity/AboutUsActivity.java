@@ -86,7 +86,8 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
                 myDialog.show();
                 break;
             case R.id.rl_web:
-                startActivity(new Intent(AboutUsActivity.this,WebViewActivity.class).putExtra("title","官方网站"));
+//                startActivity(new Intent(AboutUsActivity.this,BaseWebActivity.class).putExtra("title","官方网站"));
+                startActivity(new Intent(AboutUsActivity.this,BaseWebActivity.class).putExtra("title","官方网站"));
                 break;
         }
     }

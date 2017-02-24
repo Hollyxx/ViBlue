@@ -35,6 +35,8 @@ public class MyTravelActivity extends BaseActivity implements View.OnClickListen
     ImageView iv_back;
     @ViewInject(R.id.rl_empty)
     RelativeLayout rl_empty;
+    @ViewInject(R.id.rl_view)
+    RelativeLayout rl_view;
     @ViewInject(R.id.xrv_list)
     XRecyclerView mRecyclerView;
     @ViewInject(R.id.view_header)
@@ -59,6 +61,7 @@ public class MyTravelActivity extends BaseActivity implements View.OnClickListen
     private void init() {
         SysApplication.getInstance().addActivity(this);
         iv_back.setOnClickListener(this);
+        rl_view.setVisibility(View.GONE);
         Connect.getOrdersPb(this,page+"",this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -114,6 +117,7 @@ public class MyTravelActivity extends BaseActivity implements View.OnClickListen
         switch (whereRequest) {
             case Connect.GET_ORDERS:
                 if (getCode(result) == 0) {
+                    rl_view.setVisibility(View.VISIBLE);
                     MyTravel reditCount= new Gson().fromJson(result, MyTravel.class);
                     MyTravel.DataBean data=reditCount.getData();
                     total_page=data.getTotal_pages();

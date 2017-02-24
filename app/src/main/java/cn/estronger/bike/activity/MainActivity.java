@@ -56,15 +56,12 @@ import com.amap.api.services.route.RouteSearch;
 import com.amap.api.services.route.WalkPath;
 import com.amap.api.services.route.WalkRouteResult;
 import com.google.gson.Gson;
-import com.kaopiz.kprogresshud.KProgressHUD;
 import com.tools.ViewTools;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -83,9 +80,11 @@ import cn.estronger.bike.application.SysApplication;
 import cn.estronger.bike.bean.BikeOrder;
 import cn.estronger.bike.bean.COrder;
 import cn.estronger.bike.bean.CurrentOrder;
+import cn.estronger.bike.bean.LockInfo;
 import cn.estronger.bike.bean.LockPosition;
 import cn.estronger.bike.bean.MarkLength;
 import cn.estronger.bike.bean.MarkerBean;
+import cn.estronger.bike.bean.MarkerInfo;
 import cn.estronger.bike.bean.SearchHistorysBean;
 import cn.estronger.bike.bean.UserInfoBean;
 import cn.estronger.bike.connect.Connect;
@@ -247,7 +246,7 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         };
         //判断需不需要进入指导页面
         if (!PrefUtils.getBooleanWithName(this, "first", "is_intro_showed", false)) {
-            startActivity(new Intent(MainActivity.this, IntroActivity.class).putExtra("from", "home"));
+//            startActivity(new Intent(MainActivity.this, IntroActivity.class).putExtra("from", "home"));
         }
         String bookJson = getIntent().getStringExtra("order");
         if (null != bookJson) {
@@ -289,9 +288,9 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        if (!Utils.isNetworkAvailable(this)){//判断当前网络是否可用
+        if (!Utils.isNetworkAvailable(this)) {//判断当前网络是否可用
             myDialog = new MyDialog();
-            myDialog.showNoticeDialog(this, "当前网络差或不可用，请检查手机网络！", this,false);
+            myDialog.showNoticeDialog(this, "当前网络差或不可用，请检查手机网络！", this, false);
             myDialog.show();
             return true;
         }
@@ -305,11 +304,8 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                     if (walkRouteOverlay != null) {
                         walkRouteOverlay.removeFromMap();
                     }
-                    try {
-                        JSONObject object = new JSONObject((String) marker.getObject());
-                        setOrderOneStep(object);
-                    } catch (Exception e) {
-                    }
+                    MarkerInfo markerInfo = new Gson().fromJson((String) marker.getObject(), MarkerInfo.class);
+                    setOrderOneStep(markerInfo);
 //                    RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(new LatLonPoint(llat==0.0?clat:llat, llng==0.0?clng:llng), new LatLonPoint(marker.getPosition().latitude, marker.getPosition().longitude));
                     RouteSearch.FromAndTo fromAndTo = new RouteSearch.FromAndTo(new LatLonPoint(clat, clng), new LatLonPoint(marker.getPosition().latitude, marker.getPosition().longitude));
                     RouteSearch.WalkRouteQuery query = new RouteSearch.WalkRouteQuery(fromAndTo, RouteSearch.WalkDefault);
@@ -337,11 +333,21 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                 walkRouteOverlay.removeFromMap();
                 walkRouteOverlay.addToMap();
                 walkRouteOverlay.zoomToSpan();//移动地图 到可是路径规划
-//                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_length, (int) walkPath.getDistance() + "");
-                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_length, AMapUtil.getFriendlyLength((int) walkPath.getDistance()));
-                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_time, AMapUtil.getFriendlyTime((int) walkPath.getDuration()));
 //                llat=clat;
 //                llng=clng;
+//                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_length, (int) walkPath.getDistance() + "");
+                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_length, AMapUtil.getFriendlyLength((int) walkPath.getDistance()));
+                //判断小时是否为0
+                if ((int) walkPath.getDuration() < 3600) {
+                    ViewTools.setGone(MainActivity.this, R.id.tv_time_hour);
+                    ViewTools.setGone(MainActivity.this, R.id.tv_xiaoshi);
+                    ViewTools.setStringToTextView(MainActivity.this, R.id.tv_time, AMapUtil.getFriendlyTime((int) walkPath.getDuration()));
+                } else {
+                    ViewTools.setVisible(MainActivity.this, R.id.tv_time_hour);
+                    ViewTools.setVisible(MainActivity.this, R.id.tv_xiaoshi);
+                    ViewTools.setStringToTextView(MainActivity.this, R.id.tv_time_hour, AMapUtil.getFriendlyTime((int) walkPath.getDuration()).substring(0, AMapUtil.getFriendlyTime((int) walkPath.getDuration()).indexOf("时")));
+                    ViewTools.setStringToTextView(MainActivity.this, R.id.tv_time, AMapUtil.getFriendlyTime((int) walkPath.getDuration()).substring(AMapUtil.getFriendlyTime((int) walkPath.getDuration()).indexOf("时") + 1, AMapUtil.getFriendlyTime((int) walkPath.getDuration()).length()));
+                }
             }
         }
     }
@@ -392,21 +398,19 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         public void onReceive(Context context, Intent intent) {
             if (MyReceiver.MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
                 //这里接收到开锁信息后开始计费
-                try {
-                    if (getCode(intent.getStringExtra("message")) == 0) {
-                        JSONObject data = new JSONObject(intent.getStringExtra("message")).getJSONObject("data");
-                        order_sn = data.getString("order_sn");
-                        device_id = data.getString("device_id");
-                        if ("open".equals(data.getString("cmd"))) {//开锁显示计费  和通知关闭
-                            cancelTimer();
-                            EventBus.getDefault().post("lock_open");
-                            setRiding();
-                        } else if ("close".equals(data.getString("cmd"))) {//关锁跳转到计费完成页面   和隐藏计费 恢复初始状态
-                            setRidingOver();
-                            startActivity(new Intent(MainActivity.this, RideOverActivity.class).putExtra("order_sn", order_sn).putExtra("device_id", device_id));
-                        }
+                if (getCode(intent.getStringExtra("message")) == 0) {
+                    LockInfo lockInfo = new Gson().fromJson(intent.getStringExtra("message"), LockInfo.class);
+                    LockInfo.DataBean data = lockInfo.getData();
+                    order_sn = data.getOrder_sn();
+                    device_id = data.getDevice_id();
+                    if ("open".equals(data.getCmd())) {//开锁显示计费  和通知关闭
+                        cancelTimer();
+                        EventBus.getDefault().post("lock_open");
+                        setRiding();
+                    } else if ("close".equals(data.getCmd())) {//关锁跳转到计费完成页面   和隐藏计费 恢复初始状态
+                        setRidingOver();
+                        startActivity(new Intent(MainActivity.this, RideOverActivity.class).putExtra("order_sn", order_sn).putExtra("device_id", device_id));
                     }
-                } catch (JSONException e) {
                 }
             }
         }
@@ -443,26 +447,23 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
     /**
      * 预约第一步 点击marker后弹出
      */
-    private void setOrderOneStep(JSONObject object) {
+    private void setOrderOneStep(MarkerInfo object) {
         status = 2;
-        try {
-            if ("1".equals(object.getString("type"))) {
-                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_type, "单人自行车");
-            } else if ("2".equals(object.getString("type"))) {
-                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_type, "双人自行车");
-            } else if ("3".equals(object.getString("type"))) {
-                ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_type, "家庭自行车");
-            }
-//            bicycle_sn=object.getString("bicycle_sn");//现在用的是锁的sn，到时候要换成单车sn
-            bicycle_sn = object.getString("lock_sn");
-            scenic_spot_name = object.getString("scenic_spot_name");
-            ViewTools.setStringToTextView(MainActivity.this, R.id.tv_scenic_name, object.getString("scenic_spot_name"));
-            ViewTools.setStringToTextView(MainActivity.this, R.id.tv_fee, object.getString("fee"));
-        } catch (JSONException e) {
+        if ("1".equals(object.getType())) {
+            ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_type, "单人自行车");
+        } else if ("2".equals(object.getType())) {
+            ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_type, "双人自行车");
+        } else if ("3".equals(object.getType())) {
+            ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_type, "家庭自行车");
         }
+        //TODO
+//            bicycle_sn=object.getString("bicycle_sn");//现在用的是锁的sn，到时候要换成单车sn
+        bicycle_sn = object.getLock_sn();
+        scenic_spot_name = object.getScenic_spot_name();
+        ViewTools.setStringToTextView(MainActivity.this, R.id.tv_scenic_name, object.getScenic_spot_name());
+        ViewTools.setStringToTextView(MainActivity.this, R.id.tv_fee, object.getFee());
         ViewTools.setVisible(MainActivity.this, R.id.ll_start_order);
         ViewTools.setGone(MainActivity.this, R.id.iv_position);//隐藏地图中间的大头针
-        ib_zxing.setEnabled(false);//设置客户服务按钮不可点
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//设置不可滑出侧滑菜单
     }
 
@@ -474,8 +475,6 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         ViewTools.setGone(MainActivity.this, R.id.ll_start_order);
         ViewTools.setGone(MainActivity.this, R.id.ll_ordering);
         ViewTools.setVisible(MainActivity.this, R.id.iv_position);
-        ib_zxing.setEnabled(true);//设置扫码按钮可点
-        iv_home_seach.setEnabled(true);//搜索按钮可点
 //        llat=0.0;
 //        llng=0.0;
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);//打开手势滑动
@@ -492,8 +491,6 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         status = 3; // 预约中
         ViewTools.setGone(MainActivity.this, R.id.ll_start_order);
         ViewTools.setVisible(MainActivity.this, R.id.ll_ordering);
-        ib_zxing.setEnabled(true);//设置搜索按钮可点
-//        iv_home_seach.setEnabled(false);//搜索按钮不可点
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//设置不可滑出侧滑菜单
         ViewTools.setStringToTextView(MainActivity.this, R.id.tv_scenic_spot_name, scenic_spot_name);
         ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_sn, result.getData().getBicycle_sn());
@@ -508,7 +505,6 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
         status = 3; // 预约中
         ViewTools.setGone(MainActivity.this, R.id.ll_start_order);
         ViewTools.setVisible(MainActivity.this, R.id.ll_ordering);
-        ib_zxing.setEnabled(true);//设置搜索按钮可点
         index_drawerlayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);//设置不可滑出侧滑菜单
         ViewTools.setStringToTextView(MainActivity.this, R.id.tv_scenic_spot_name, scenic_spot_name);
         ViewTools.setStringToTextView(MainActivity.this, R.id.tv_bike_sn, result.getData().getCurrent_order().getBicycle_sn());
@@ -553,9 +549,9 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
             R.id.ll_my_route, R.id.btn_cancel_order, R.id.btn_order_nav,
             R.id.ll_my_msg, R.id.ll_invite_friend, R.id.ll_user_guide, R.id.ll_setting, R.id.ll_order_one, R.id.rl_bell})
     private void onEventClick(View v) {
-        if (!Utils.isNetworkAvailable(this)){//判断当前网络是否可用
+        if (!Utils.isNetworkAvailable(this)) {//判断当前网络是否可用
             myDialog = new MyDialog();
-            myDialog.showNoticeDialog(this, "当前网络差或不可用，请检查手机网络！", this,false);
+            myDialog.showNoticeDialog(this, "当前网络差或不可用，请检查手机网络！", this, false);
             myDialog.show();
             return;
         }
@@ -875,13 +871,18 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                     if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                         String result = bundle.getString(CodeUtils.RESULT_STRING);
                         //这里还要加上二维码的判断    不是所有二维码 都可以往服务器发送
-                        if (!Validator.isLockCode(result)) {
-                            Toast toast = Toast.makeText(this, "     请扫描车锁二维码     ", Toast.LENGTH_LONG);
+                        if(Validator.isUrl(result)&&result.contains("b=")&&result.length()>15){
+                            if (Validator.isNumeric(result.substring(result.length()-11,result.length()))){
+                                Connect.openLock(this, result.substring(result.length()-11,result.length()), mLat + "", mLng + "", this);//开锁
+                            }else {
+                                ToastUtils.showShort(MainActivity.this, "请扫描单车二维码");
+                            }
+                        }else {
+                            Toast toast = Toast.makeText(this, "     请扫描单车二维码     ", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                             return;
                         }
-                        Connect.openLock(this, result, mLat + "", mLng + "", this);//开锁
                     } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                         ToastUtils.showShort(MainActivity.this, "解析二维码失败");
                     }
@@ -1118,13 +1119,13 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
 
     private void showRationaleDialog(@StringRes int messageResId, final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.allow), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.refuse), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.cancel();
@@ -1179,6 +1180,9 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
             } else if ("4".equals(state)) {
                 startActivity(new Intent(MainActivity.this, TopUpRechargeActivity.class));
             } else {
+                if (status == 2) {
+                    setOrderOneStepExit();
+                }
                 startActivityForResult(new Intent(MainActivity.this, ZxingActivity.class), ZXING_CODE);
             }
         }
@@ -1220,6 +1224,8 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                     order_sn = bikeOrder.getData().getOrder_sn();
                     bicycle_sn = bikeOrder.getData().getLock_sn();//这里后面要换成单车sn
                     setOrdering(bikeOrder, "");
+                } else {
+                    setOrderOneStepExit();
                 }
                 break;
             case Connect.GET_ORDER_INFO:
@@ -1257,6 +1263,8 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                     PrefUtils.setString(MainActivity.this, "avatar", data.getAvatar());
                     PrefUtils.setString(MainActivity.this, "credit_point", data.getCredit_point());
                     PrefUtils.setString(MainActivity.this, "nickname", data.getNickname());
+                    PrefUtils.setString(MainActivity.this, "verify_state", data.getVerify_state());
+                    PrefUtils.setString(MainActivity.this, "phone", data.getMobile());
                     if ("1".equals(data.getDeposit_state()) && "1".equals(data.getVerify_state())) {
                         if ("0.00".equals(data.getAvailable_deposit())) {
                             PrefUtils.setString(this, "state", "2");
@@ -1271,6 +1279,9 @@ public class MainActivity extends BaseActivity implements LocationSource, View.O
                     } else if ("1".equals(data.getDeposit_state()) && "0".equals(data.getVerify_state())) {
                         PrefUtils.setString(this, "state", "1");
                         state = "1";
+                    }
+                    if ("1".equals(data.getVerify_state())) {
+                        PrefUtils.setString(MainActivity.this, "real_name", data.getReal_name());
                     }
                 }
                 break;

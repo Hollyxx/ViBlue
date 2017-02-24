@@ -53,13 +53,13 @@ public class OrderAndOpenLockActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_realname_no_pass:
-                startActivity(new Intent(OrderAndOpenLockActivity.this,WebViewActivity.class).putExtra("title","预约能为我保留多久"));
+                startActivity(new Intent(OrderAndOpenLockActivity.this,BaseWebActivity.class).putExtra("title","预约能为我保留多久"));
                 break;
             case R.id.rl_realname_isexist:
-                startActivity(new Intent(OrderAndOpenLockActivity.this,WebViewActivity.class).putExtra("title","预约后怎么找到单车"));
+                startActivity(new Intent(OrderAndOpenLockActivity.this,BaseWebActivity.class).putExtra("title","预约后怎么找到单车"));
                 break;
             case R.id.rl_about_invitation_code:
-                startActivity(new Intent(OrderAndOpenLockActivity.this,WebViewActivity.class).putExtra("title","如何关锁"));
+                startActivity(new Intent(OrderAndOpenLockActivity.this,BaseWebActivity.class).putExtra("title","如何关锁"));
                 break;
         }
     }

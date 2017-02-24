@@ -1,10 +1,15 @@
 package cn.estronger.bike.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,6 +29,11 @@ import cn.estronger.bike.widget.CircularImage;
 import com.OpenCameraActivity;
 
 import cn.estronger.bike.utils.PopWindowUtil;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
+import permissions.dispatcher.RuntimePermissions;
 
 import com.google.gson.Gson;
 import com.tools.SystemTools;
@@ -34,10 +44,14 @@ import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import static android.R.attr.data;
+import static cn.estronger.bike.R.id.et_phone;
+import static cn.estronger.bike.widget.ChString.To;
+
 /**
  * Created by MrLv on 2016/12/12.
  */
-
+@RuntimePermissions
 public class UserInfoActivity extends BaseActivity implements View.OnClickListener, MyHttpUtils.MyHttpCallback {
     @ViewInject(R.id.iv_back)
     ImageView iv_back;
@@ -85,7 +99,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
 
     private void init() {
         SysApplication.getInstance().addActivity(this);
-        tv_title.setText("个人信息");
+        tv_title.setText(getResources().getString(R.string.personal_information));
         iv_back.setOnClickListener(this);
         rl_ci_header.setOnClickListener(this);
         rl_nick_name.setOnClickListener(this);
@@ -99,6 +113,21 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 .build();
         if (!"".equals(PrefUtils.getString(this, "avatar", ""))) {
             x.image().bind(ci_head_img, PrefUtils.getString(this, "avatar", ""));
+        }
+        tv_nick_name.setText(PrefUtils.getString(this, "nickname", ""));
+        tv_phone.setText(PrefUtils.getString(this, "phone", "").replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2"));
+        if ("1".equals(PrefUtils.getString(this, "verify_state", ""))) {
+            tv_verify.setText(getResources().getText(R.string.Certified));
+            tv_real_name.setText(PrefUtils.getString(this, "real_name", ""));
+            rl_certification.setClickable(false);
+            tv_verify.setTextColor(Color.rgb(105, 105, 105));
+            iv_certification.setVisibility(View.INVISIBLE);
+        } else {
+            tv_verify.setText(getResources().getText(R.string.Not_certified));
+            tv_real_name.setText(getResources().getText(R.string.Not_certified));
+            tv_verify.setTextColor(Color.rgb(255, 69, 0));
+            rl_certification.setClickable(true);
+            iv_certification.setVisibility(View.VISIBLE);
         }
     }
 
@@ -136,7 +165,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 if (Utils.isCameraPermission()) {
                     poUtil.showPopWindow(ll_contanier);
                 } else {
-                    ToastUtils.showShort(this, "没有获得相机权限,请到设置里面打开");
+                    UserInfoActivityPermissionsDispatcher.showCameraWithCheck(this);
                 }
                 break;
             case R.id.item_popupwindows_Photo://从相册获取图片
@@ -144,6 +173,39 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 poUtil.hidePopWindow();
                 break;
         }
+    }
+
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void showCamera() {
+        poUtil.showPopWindow(ll_contanier);
+    }
+
+    @OnPermissionDenied(Manifest.permission.CAMERA)
+    void onCameraDenied() {
+       ToastUtils.showShort(this,getResources().getText(R.string.Not_carm_p));
+    }
+
+    @OnShowRationale(Manifest.permission.CAMERA)
+    void showRationaleForCamera(PermissionRequest request) {
+        showRationaleDialog(R.string.permission_camera_head, request);
+    }
+    private void showRationaleDialog(@StringRes int messageResId, final PermissionRequest request) {
+        new AlertDialog.Builder(this)
+                .setPositiveButton(getResources().getText(R.string.allow), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(@NonNull DialogInterface dialog, int which) {
+                        request.proceed();
+                    }
+                })
+                .setNegativeButton(getResources().getText(R.string.refuse), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(@NonNull DialogInterface dialog, int which) {
+                        request.cancel();
+                    }
+                })
+                .setCancelable(false)
+                .setMessage(messageResId)
+                .show();
     }
 
     @Override
@@ -190,20 +252,27 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                     UserInfoBean.DataBean data = userInfo.getData();
                     x.image().bind(ci_head_img, data.getAvatar());
                     PrefUtils.setString(UserInfoActivity.this, "nickname", data.getNickname());
-                    tv_nick_name.setText(data.getNickname());
+                    PrefUtils.setString(UserInfoActivity.this, "avatar", data.getAvatar());
+                    if ("1".equals(data.getVerify_state())){
+                        PrefUtils.setString(UserInfoActivity.this, "real_name", data.getReal_name());
+                    }
+                    PrefUtils.setString(UserInfoActivity.this, "credit_point", data.getCredit_point());
+                    PrefUtils.setString(UserInfoActivity.this, "verify_state", data.getVerify_state());
+                    PrefUtils.setString(UserInfoActivity.this, "phone", data.getMobile());
                     if ("1".equals(data.getVerify_state())) {
-                        tv_verify.setText("已认证");
+                        tv_verify.setText(getResources().getText(R.string.Certified));
                         tv_real_name.setText(data.getReal_name());
                         rl_certification.setClickable(false);
                         tv_verify.setTextColor(Color.rgb(105, 105, 105));
                         iv_certification.setVisibility(View.INVISIBLE);
                     } else {
-                        tv_verify.setText("未认证");
-                        tv_real_name.setText("未认证");
+                        tv_verify.setText(getResources().getText(R.string.Not_certified));
+                        tv_real_name.setText(getResources().getText(R.string.Not_certified));
                         tv_verify.setTextColor(Color.rgb(255, 69, 0));
                         rl_certification.setClickable(true);
                         iv_certification.setVisibility(View.VISIBLE);
                     }
+                    tv_nick_name.setText(data.getNickname());
                     tv_phone.setText(data.getMobile().replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2"));
                 }
                 break;

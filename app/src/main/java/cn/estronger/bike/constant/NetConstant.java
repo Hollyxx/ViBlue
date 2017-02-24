@@ -162,6 +162,10 @@ public interface NetConstant {
      */
     String SHARE="http://bike.e-stronger.com/bike/wechat/myTripShare.html?";
     /**
+     *邀请好友
+     */
+    String INVITE="http://bike.e-stronger.com/bike/wechat/shareCoupon.html?encryptCode=";
+    /**
      *停车拍照
      */
     String CONTACT=SERVER_URL+"api/index.php?route=system/common/contact";

@@ -67,6 +67,7 @@
             android:layout_marginTop="60dp"
             android:background="@drawable/semi_round_backgroud"
             android:text="确定"
+            style="?android:attr/borderlessButtonStyle"
             android:textColor="#ffffff" />
 
 

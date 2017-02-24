@@ -19,7 +19,7 @@ import org.xutils.x;
  * Created by MrLv on 2016/12/12.
  */
 
-public class RefundDepositActivity extends BaseActivity implements MyHttpUtils.MyHttpCallback {
+public class RefundDepositActivity extends BaseActivity {
     @ViewInject(R.id.tv_title)
     TextView tv_title;
     @ViewInject(R.id.view_header)
@@ -53,22 +53,6 @@ public class RefundDepositActivity extends BaseActivity implements MyHttpUtils.M
                 finish();
                 break;
 
-        }
-    }
-
-    @Override
-    public void onSuccess(String result, int whereRequest) {
-        switch (whereRequest) {
-            case 12132132:
-                break;
-        }
-    }
-
-    @Override
-    public void onError(String errorMsg, int whereRequest) {
-        switch (whereRequest) {
-            case 12132132:
-                break;
         }
     }
 }

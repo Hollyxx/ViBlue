@@ -1,6 +1,7 @@
 package cn.estronger.bike.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -61,7 +62,7 @@ public class TopUpDepositActivity extends BaseActivity implements MyHttpUtils.My
     private int pay_way = 1;   //1是支付宝   2是微信
     private IWXAPI wxapi;
     private static final int SDK_PAY_FLAG = 1;
-    private KProgressHUD hud;
+    private Dialog hud;
 
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
@@ -114,7 +115,7 @@ public class TopUpDepositActivity extends BaseActivity implements MyHttpUtils.My
         SysApplication.getInstance().addActivity(this);
         //订阅事件
         EventBus.getDefault().register(this);
-        tv_title.setText("押金充值");
+        tv_title.setText(getResources().getText(R.string.Charge_deposit));
         ll_alipay.setSelected(true);
         wxapi = WXAPIFactory.createWXAPI(this, NetConstant.APPID);
     }
@@ -180,7 +181,8 @@ public class TopUpDepositActivity extends BaseActivity implements MyHttpUtils.My
                         } else {//微信
                             Connect.wxPay(TopUpDepositActivity.this, data.getString("pdr_sn"), this);
                         }
-                        hud = Utils.createAutoHud(TopUpDepositActivity.this);
+                        hud = Utils.createLoadingDialog(TopUpDepositActivity.this);
+                        hud.show();
                     } catch (JSONException e) {
                     }
                 }

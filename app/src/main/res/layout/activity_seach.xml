@@ -28,12 +28,13 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="4dp"
             android:gravity="center"
-            android:text="取消"
+            android:text="@string/cancel"
             android:textColor="#ffffff" />
 
         <EditText
             android:id="@+id/et_addr"
-            style="@style/EtStyle" />
+            style="@style/EtStyle"
+            android:hint="@string/Where_to_find_me"/>
 
     </RelativeLayout>
 
@@ -54,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="我的位置"
+                android:text="@string/my_location"
                 android:textColor="#363636"
                 android:textSize="13sp" />
 
@@ -83,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="清空历史记录" />
+                android:text="@string/Empty_the_history" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -92,7 +93,6 @@
         android:id="@+id/xrv_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-
         android:layout_below="@id/rl_title"
         android:visibility="gone" />
 

@@ -51,10 +51,10 @@ public class AboutBikeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_realname_no_pass:
-                startActivity(new Intent(AboutBikeActivity.this,WebViewActivity.class).putExtra("title","单车类型介绍"));
+                startActivity(new Intent(AboutBikeActivity.this,BaseWebActivity.class).putExtra("title","单车类型介绍"));
                 break;
             case R.id.rl_realname_isexist:
-                startActivity(new Intent(AboutBikeActivity.this,WebViewActivity.class).putExtra("title","我发现了坏车,怎么通知小强"));
+                startActivity(new Intent(AboutBikeActivity.this,BaseWebActivity.class).putExtra("title","我发现了坏车,怎么通知小强"));
                 break;
         }
     }

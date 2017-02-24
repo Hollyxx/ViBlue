@@ -179,19 +179,19 @@ public class TravelDetailActivity extends BaseActivity implements MyHttpUtils.My
         //关闭sso授权
         oks.disableSSOWhenAuthorize();
         // title标题，印象笔记、邮箱、信息、微信、人人网、QQ和QQ空间使用
-        oks.setTitle("小强单车行程分享");
+        oks.setTitle(getResources().getText(R.string.Title).toString());
         // titleUrl是标题的网络链接，仅在Linked-in,QQ和QQ空间使用
         oks.setTitleUrl(NetConstant.SHARE+"order_id="+datas.getOrder_info().getOrder_id()+"&encryptCode="+PrefUtils.getString(this, "encryptCode", "null"));
         // text是分享文本，所有平台都需要这个字段
-        oks.setText("我在小强单车完成了一次骑行，快来一起骑行吧");
+        oks.setText(getResources().getText(R.string.ShareText).toString());
         //分享网络图片，新浪微博分享网络图片需要通过审核后申请高级写入接口，否则请注释掉测试新浪微博
         oks.setImageUrl(NetConstant.IMG_URL);
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl(NetConstant.SHARE+"order_id="+datas.getOrder_info().getOrder_id()+"&encryptCode="+PrefUtils.getString(this, "encryptCode", "null"));
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("邀请您加入小强单车，共享绿色生活");
+        oks.setComment(getResources().getText(R.string.ShareComment).toString());
         // site是分享此内容的网站名称，仅在QQ空间使用
-        oks.setSite("小强单车");
+        oks.setSite(getResources().getText(R.string.app_name).toString());
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl(NetConstant.SHARE+"order_id="+datas.getOrder_info().getOrder_id()+"&encryptCode="+PrefUtils.getString(this, "encryptCode", "null"));
         // 启动分享GUI

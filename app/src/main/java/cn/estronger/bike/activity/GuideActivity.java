@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -21,6 +23,7 @@ import cn.estronger.bike.R;
 import cn.estronger.bike.utils.DensityUtils;
 import cn.estronger.bike.utils.PrefUtils;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.x;
 
 public class GuideActivity extends Activity implements OnClickListener {
@@ -37,7 +40,6 @@ public class GuideActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guide);
-
 		vpGuide = (ViewPager) findViewById(R.id.vp_guide);
 		llPointGroup = (LinearLayout) findViewById(R.id.ll_point_group);
 		viewRedPoint = findViewById(R.id.view_red_point);
@@ -47,8 +49,25 @@ public class GuideActivity extends Activity implements OnClickListener {
 
 		initViews();
 		vpGuide.setAdapter(new GuideAdapter());
-
 		vpGuide.setOnPageChangeListener(new GuidePageListener());
+		hideBottomUIMenu();
+	}
+
+	/**
+	 * 隐藏虚拟按键，并且全屏
+	 */
+	protected void hideBottomUIMenu() {
+		//隐藏虚拟按键，并且全屏
+		if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
+			View v = this.getWindow().getDecorView();
+			v.setSystemUiVisibility(View.GONE);
+		} else if (Build.VERSION.SDK_INT >= 19) {
+			//for new api versions.
+			View decorView = getWindow().getDecorView();
+			int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+					| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+			decorView.setSystemUiVisibility(uiOptions);
+		}
 	}
 
 	/**
@@ -65,7 +84,6 @@ public class GuideActivity extends Activity implements OnClickListener {
 			mImageViewList.add(image);
 			if (i == (drawableRes.length - 1)) {
 				image.setOnClickListener(this);
-
 			}
 		}
 

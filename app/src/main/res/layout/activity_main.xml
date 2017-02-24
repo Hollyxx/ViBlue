@@ -24,7 +24,7 @@
                 style="@style/IvHeaderStyle" />
 
             <TextView
-                android:text="首页"
+                android:text="@string/home_page"
                 android:textColor="#ffffff"
                 android:textSize="16sp"
                 android:layout_centerInParent="true"
@@ -50,7 +50,7 @@
                     android:layout_centerHorizontal="true"
                     android:id="@+id/tv_all"
                     style="@style/TvFneLeiStyle"
-                    android:text="全部" />
+                    android:text="@string/all" />
 
                 <View
                     style="@style/HomeBootomStyle"
@@ -68,7 +68,7 @@
                     <TextView
                         android:id="@+id/tv_single"
                         style="@style/TvFneLeiStyle"
-                        android:text="单人" />
+                        android:text="@string/single" />
 
                     <View
                         style="@style/HomeBootomStyle"
@@ -97,7 +97,7 @@
                     <TextView
                         android:id="@+id/tv_double"
                         style="@style/TvFneLeiStyle"
-                        android:text="双人" />
+                        android:text="@string/doubles" />
 
                     <View
                         style="@style/HomeBootomStyle"
@@ -126,7 +126,7 @@
                     <TextView
                         android:id="@+id/tv_family"
                         style="@style/TvFneLeiStyle"
-                        android:text="家庭" />
+                        android:text="@string/family" />
 
                     <View
                         style="@style/HomeBootomStyle"

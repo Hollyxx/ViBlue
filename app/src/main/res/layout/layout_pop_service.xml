@@ -25,8 +25,9 @@
                 android:id="@+id/btn_report_illegally_park"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:textAllCaps="false"
                 android:background="@drawable/bt_nobgd"
-                android:text="举报违停"
+                android:text="@string/Report_illegal_stop"
                 android:textColor="#585858" />
         </LinearLayout>
 
@@ -42,8 +43,9 @@
                 android:id="@+id/btn_find_bug"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:textAllCaps="false"
                 android:background="@drawable/bt_nobgd"
-                android:text="发现故障"
+                android:text="@string/Fault_finding"
                 android:textColor="#585858" />
         </LinearLayout>
 
@@ -59,8 +61,9 @@
                 android:id="@+id/btn_help"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:textAllCaps="false"
                 android:background="@drawable/bt_nobgd"
-                android:text="使用帮助"
+                android:text="@string/Use_help"
                 android:textColor="#585858"/>
         </LinearLayout>
 
@@ -72,8 +75,9 @@
             android:id="@+id/btn_cancel"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textAllCaps="false"
             android:background="@drawable/bt_nobgd"
-            android:text="取消"
+            android:text="@string/cancel"
             android:textColor="#585858"/>
     </LinearLayout>
 

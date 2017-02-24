@@ -54,16 +54,16 @@ public class PriceAndDepositActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_realname_no_pass:
-                startActivity(new Intent(PriceAndDepositActivity.this,WebViewActivity.class).putExtra("title","为什么要交押金,押金与车费有什么不同"));
+                startActivity(new Intent(PriceAndDepositActivity.this,BaseWebActivity.class).putExtra("title","为什么要交押金,押金与车费有什么不同"));
                 break;
             case R.id.rl_realname_isexist:
-                startActivity(new Intent(PriceAndDepositActivity.this,WebViewActivity.class).putExtra("title","押金退款已超7个工作日还没到账"));
+                startActivity(new Intent(PriceAndDepositActivity.this,BaseWebActivity.class).putExtra("title","押金退款已超7个工作日还没到账"));
                 break;
             case R.id.rl_about_invitation_code:
-                startActivity(new Intent(PriceAndDepositActivity.this,WebViewActivity.class).putExtra("title","假如我骑行费用超过余额,导致余额为负怎么办"));
+                startActivity(new Intent(PriceAndDepositActivity.this,BaseWebActivity.class).putExtra("title","假如我骑行费用超过余额,导致余额为负怎么办"));
                 break;
             case R.id.rl_modifi_phone:
-                startActivity(new Intent(PriceAndDepositActivity.this,WebViewActivity.class).putExtra("title","使用小强单车怎么收费"));
+                startActivity(new Intent(PriceAndDepositActivity.this,BaseWebActivity.class).putExtra("title","使用小强单车怎么收费"));
                 break;
         }
     }

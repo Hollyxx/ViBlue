@@ -1,6 +1,7 @@
 package cn.estronger.bike.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -58,7 +59,7 @@ public class TopUpRechargeActivity extends BaseActivity implements MyHttpUtils.M
     private int pay_way = 1;   //1是支付宝   2是微信
     private IWXAPI wxapi;
     private static final int SDK_PAY_FLAG = 1;
-    private KProgressHUD hud;
+    private Dialog hud;
     private MyDialog myDialog;
     @ViewInject(R.id.view_header)
     LinearLayout view_header;
@@ -159,7 +160,8 @@ public class TopUpRechargeActivity extends BaseActivity implements MyHttpUtils.M
                         } else {//微信
                             Connect.wxPay(TopUpRechargeActivity.this, data.getString("pdr_sn"), this);
                         }
-                        hud = Utils.createAutoHud(TopUpRechargeActivity.this);
+                        hud = Utils.createLoadingDialog(TopUpRechargeActivity.this);
+                        hud.show();
                     } catch (JSONException e) {
                     }
                 }

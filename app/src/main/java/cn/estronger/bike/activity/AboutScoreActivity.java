@@ -52,13 +52,13 @@ public class AboutScoreActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_realname_no_pass:
-                startActivity(new Intent(AboutScoreActivity.this,WebViewActivity.class).putExtra("title","什么是小强信用分"));
+                startActivity(new Intent(AboutScoreActivity.this,BaseWebActivity.class).putExtra("title","什么是小强信用分"));
                 break;
             case R.id.rl_realname_isexist:
-                startActivity(new Intent(AboutScoreActivity.this,WebViewActivity.class).putExtra("title","负面记录是什么,如何申诉"));
+                startActivity(new Intent(AboutScoreActivity.this,BaseWebActivity.class).putExtra("title","负面记录是什么,如何申诉"));
                 break;
             case R.id.rl_about_invitation_code:
-                startActivity(new Intent(AboutScoreActivity.this,WebViewActivity.class).putExtra("title","信用分太低了会怎么样"));
+                startActivity(new Intent(AboutScoreActivity.this,BaseWebActivity.class).putExtra("title","信用分太低了会怎么样"));
                 break;
         }
     }

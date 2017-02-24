@@ -8,8 +8,9 @@ import java.util.List;
 
 public class Coupon {
 
+
     /**
-     * data : {"items":[{"add_time":"1486869493","coupon_code":"CbVUB6zn1PTQpkg8LdGzFs72IibQx1jm","coupon_id":"4","coupon_type":"1","description":"1小时用车券","effective_time":"1486869493","expired":false,"failure_time":"2017-03-14","number":1,"obtain":"0","unit":"分钟","used":false,"used_time":"0","user_id":"13"}],"total_items_count":"83","total_pages":9}
+     * data : {"items":[{"add_time":"1487900056","coupon_code":"cMsXWqoNs3MJ7UAOq4SDrkmohTGHRA21","coupon_id":"114","coupon_type":"1","description":"","effective_time":"1487865600","expired":false,"failure_time":"2017-02-25","number":0.5,"obtain":"0","order_id":"0","unit":"小时","used":false,"used_time":"0","user_id":"198"}],"total_items_count":"1","total_pages":1}
      * errorCode : 0
      * msg : 操作成功
      */
@@ -44,9 +45,9 @@ public class Coupon {
 
     public static class DataBean {
         /**
-         * items : [{"add_time":"1486869493","coupon_code":"CbVUB6zn1PTQpkg8LdGzFs72IibQx1jm","coupon_id":"4","coupon_type":"1","description":"1小时用车券","effective_time":"1486869493","expired":false,"failure_time":"2017-03-14","number":1,"obtain":"0","unit":"分钟","used":false,"used_time":"0","user_id":"13"}]
-         * total_items_count : 83
-         * total_pages : 9
+         * items : [{"add_time":"1487900056","coupon_code":"cMsXWqoNs3MJ7UAOq4SDrkmohTGHRA21","coupon_id":"114","coupon_type":"1","description":"","effective_time":"1487865600","expired":false,"failure_time":"2017-02-25","number":0.5,"obtain":"0","order_id":"0","unit":"小时","used":false,"used_time":"0","user_id":"198"}]
+         * total_items_count : 1
+         * total_pages : 1
          */
 
         private String total_items_count;
@@ -79,20 +80,21 @@ public class Coupon {
 
         public static class ItemsBean {
             /**
-             * add_time : 1486869493
-             * coupon_code : CbVUB6zn1PTQpkg8LdGzFs72IibQx1jm
-             * coupon_id : 4
+             * add_time : 1487900056
+             * coupon_code : cMsXWqoNs3MJ7UAOq4SDrkmohTGHRA21
+             * coupon_id : 114
              * coupon_type : 1
-             * description : 1小时用车券
-             * effective_time : 1486869493
+             * description :
+             * effective_time : 1487865600
              * expired : false
-             * failure_time : 2017-03-14
-             * number : 1
+             * failure_time : 2017-02-25
+             * number : 0.5
              * obtain : 0
-             * unit : 分钟
+             * order_id : 0
+             * unit : 小时
              * used : false
              * used_time : 0
-             * user_id : 13
+             * user_id : 198
              */
 
             private String add_time;
@@ -103,8 +105,9 @@ public class Coupon {
             private String effective_time;
             private boolean expired;
             private String failure_time;
-            private int number;
+            private double number;
             private String obtain;
+            private String order_id;
             private String unit;
             private boolean used;
             private String used_time;
@@ -174,11 +177,11 @@ public class Coupon {
                 this.failure_time = failure_time;
             }
 
-            public int getNumber() {
+            public double getNumber() {
                 return number;
             }
 
-            public void setNumber(int number) {
+            public void setNumber(double number) {
                 this.number = number;
             }
 
@@ -188,6 +191,14 @@ public class Coupon {
 
             public void setObtain(String obtain) {
                 this.obtain = obtain;
+            }
+
+            public String getOrder_id() {
+                return order_id;
+            }
+
+            public void setOrder_id(String order_id) {
+                this.order_id = order_id;
             }
 
             public String getUnit() {

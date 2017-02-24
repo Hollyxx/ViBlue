@@ -142,6 +142,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_alignParentBottom="true"
+            style="?android:attr/borderlessButtonStyle"
             android:background="@drawable/semi_round_backgroud"/>
     </RelativeLayout>
 </LinearLayout>

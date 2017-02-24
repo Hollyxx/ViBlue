@@ -21,22 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.OpenCameraActivity;
-
-import cn.estronger.bike.R;
-import cn.estronger.bike.application.SysApplication;
-import cn.estronger.bike.connect.Connect;
-import cn.estronger.bike.utils.MyHttpUtils;
-import cn.estronger.bike.utils.PopWindowUtil;
-import cn.estronger.bike.utils.ToastUtils;
-import cn.estronger.bike.utils.Utils;
-import cn.estronger.bike.utils.Validator;
-import cn.estronger.bike.widget.MyDialog;
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnNeverAskAgain;
-import permissions.dispatcher.OnShowRationale;
-import permissions.dispatcher.PermissionRequest;
-import permissions.dispatcher.RuntimePermissions;
-
 import com.tools.SystemTools;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
@@ -50,7 +34,21 @@ import org.xutils.x;
 
 import java.io.File;
 
-import static cn.estronger.bike.connect.Connect.ZXING_CODE;
+import cn.estronger.bike.R;
+import cn.estronger.bike.application.SysApplication;
+import cn.estronger.bike.connect.Connect;
+import cn.estronger.bike.utils.MyHttpUtils;
+import cn.estronger.bike.utils.PopWindowUtil;
+import cn.estronger.bike.utils.ToastUtils;
+import cn.estronger.bike.utils.Utils;
+import cn.estronger.bike.utils.Validator;
+import cn.estronger.bike.widget.MyDialog;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
+import permissions.dispatcher.RuntimePermissions;
 
 /**
  * Created by MrLv on 2016/12/12.
@@ -76,7 +74,7 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
     @ViewInject(R.id.view_header)
     LinearLayout view_header;
     private String fault_content = "", bicycle_sn;
-    private boolean hasPic = false,hasPerm=true;
+    private boolean hasPic = false, hasPerm = true;
     private MyDialog myDialog;
     private ImageOptions imageOptions;
 
@@ -101,20 +99,22 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
+
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
-                tv_count.setText(et_info.getText().toString().length()+"");
+                tv_count.setText(et_info.getText().toString().length() + "");
             }
         });
         poUtil = new PopWindowUtil(this);
         poUtil.initPopWindow(this);
         EventBus.getDefault().register(this);
-        if (TextUtils.isEmpty(getIntent().getStringExtra("bike_sn"))){
+        if (TextUtils.isEmpty(getIntent().getStringExtra("bike_sn"))) {
             tv_code.setText("扫描或输入车辆编码");
-        }else {
+        } else {
             tv_code.setText(getIntent().getStringExtra("bike_sn"));
         }
         imageOptions = new ImageOptions.Builder()
@@ -140,7 +140,7 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void close(String event) {
         if (event.contains("bikesn")) {
-            tv_code.setText(event.replace("bikesn",""));
+            tv_code.setText(event.replace("bikesn", ""));
         }
     }
 
@@ -162,20 +162,20 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
 
     @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     void onStorageNeverAskAgain() {
-        hasPerm=false;
-        Toast toast=Toast.makeText(this,R.string.permission_storage_never_askagain, Toast.LENGTH_LONG);
-        showMyToast(toast, 5*1000);
+        hasPerm = false;
+        Toast toast = Toast.makeText(this, R.string.permission_storage_never_askagain, Toast.LENGTH_LONG);
+        showMyToast(toast, 5 * 1000);
     }
 
     private void showRationaleDialog(@StringRes int messageResId, final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.allow), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.refuse), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.cancel();
@@ -193,28 +193,25 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
         EventBus.getDefault().unregister(this);
     }
 
-    @Event(value = {R.id.iv_back, R.id.rl_zxing, R.id.iv_photo,R.id.btn_submit})
+    @Event(value = {R.id.iv_back, R.id.rl_zxing, R.id.iv_photo, R.id.btn_submit})
     private void onEventClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.rl_zxing:
-                if(Utils.isCameraPermission()){
-                    startActivityForResult(new Intent(this, ZxingOtherActivity.class), Connect.ZXING_CODE);
-                }else {
-                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
-                }
+                startActivityForResult(new Intent(this, ZxingOtherActivity.class), Connect.ZXING_CODE);
                 break;
             case R.id.iv_photo:
-                if(Utils.isCameraPermission()){
-                    if (hasPerm){
+                if (Utils.isCameraPermission()) {
+                    if (hasPerm) {
                         poUtil.showPopWindow(ll_contanier);
-                    }else {
-                        ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
+                    } else {
+//                        ToastUtils.showShort(this, "没有获得读取内存卡的权限，上传图片功能不可用");
+                        OtherActivityPermissionsDispatcher.showStorageWithCheck(this);
                     }
-                }else {
-                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
+                } else {
+                    OtherActivityPermissionsDispatcher.showCameraWithCheck(this);
                 }
                 break;
             case R.id.btn_submit:
@@ -224,11 +221,25 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
                     ToastUtils.showShort(this, "请扫描或输入车辆编码");
                     return;
                 }
-                Connect.addIllegalParking(this, MainActivity.mLat + "", MainActivity.mLng + "", bicycle_sn,fault_content, hasPic ? SystemTools.HEAD_PATH : "","2", OtherActivity.this);
+                Connect.addIllegalParking(this, MainActivity.mLat + "", MainActivity.mLng + "", bicycle_sn, fault_content, hasPic ? SystemTools.HEAD_PATH : "", "2", OtherActivity.this);
                 break;
         }
     }
 
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void showCamera() {
+        poUtil.showPopWindow(ll_contanier);
+    }
+
+    @OnPermissionDenied(Manifest.permission.CAMERA)
+    void onCameraDenied() {
+        ToastUtils.showShort(this, "无法获取相机权限，请到设置里面打开相机权限");
+    }
+
+    @OnShowRationale(Manifest.permission.CAMERA)
+    void showRationaleForCamera(PermissionRequest request) {
+        showRationaleDialog(R.string.permission_camera_photo, request);
+    }
 
 
     @Override
@@ -245,14 +256,18 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
                     }
                     if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                         String result = bundle.getString(CodeUtils.RESULT_STRING);
-                        //这里还要加上二维码的判断    不是所有二维码 都可以往服务器发送
-                        if (!Validator.isLockCode(result)) {
-                            Toast toast = Toast.makeText(this, "     请扫描车锁二维码     ", Toast.LENGTH_LONG);
+                        if(Validator.isUrl(result)&&result.contains("b=")&&result.length()>15){
+                            if (Validator.isNumeric(result.substring(result.length()-11,result.length()))){
+                                tv_code.setText(result.substring(result.length()-11,result.length()));
+                            }else {
+                                ToastUtils.showShort(this, "请扫描单车二维码");
+                            }
+                        }else {
+                            Toast toast = Toast.makeText(this, "     请扫描单车二维码     ", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                             return;
                         }
-                        tv_code.setText(result);
                     } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                         ToastUtils.showShort(OtherActivity.this, "解析二维码失败");
                     }
@@ -276,7 +291,7 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
                 if (data != null) {
                     try {
                         hasPic = true;
-                        x.image().bind(iv_photo, new File(SystemTools.HEAD_PATH).toURI().toString(),imageOptions);
+                        x.image().bind(iv_photo, new File(SystemTools.HEAD_PATH).toURI().toString(), imageOptions);
                     } catch (Exception e) {
                     }
                 }
@@ -287,7 +302,7 @@ public class OtherActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this,result);
+            exitLogin(this, result);
             return;
         }
         showMsg(result);

@@ -142,7 +142,7 @@ public class WalletRechargeActivity extends BaseActivity implements MyHttpUtils.
                 pay_way = 2;
                 break;
             case R.id.tv_agreement://充值协议
-                startActivity(new Intent(WalletRechargeActivity.this,WebViewActivity.class).putExtra("title","充值协议"));
+                startActivity(new Intent(WalletRechargeActivity.this,BaseWebActivity.class).putExtra("title","充值协议"));
                 break;
             case R.id.btn_pay://充值
                 btn_pay.setEnabled(false);

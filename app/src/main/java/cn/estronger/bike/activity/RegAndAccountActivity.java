@@ -54,16 +54,16 @@ public class RegAndAccountActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_realname_no_pass:
-                startActivity(new Intent(RegAndAccountActivity.this,WebViewActivity.class).putExtra("title","我实名认证无法通过"));
+                startActivity(new Intent(RegAndAccountActivity.this,BaseWebActivity.class).putExtra("title","我实名认证无法通过"));
                 break;
             case R.id.rl_realname_isexist:
-                startActivity(new Intent(RegAndAccountActivity.this,WebViewActivity.class).putExtra("title","实名认证时提示身份信息已存在"));
+                startActivity(new Intent(RegAndAccountActivity.this,BaseWebActivity.class).putExtra("title","实名认证时提示身份信息已存在"));
                 break;
             case R.id.rl_about_invitation_code:
-                startActivity(new Intent(RegAndAccountActivity.this,WebViewActivity.class).putExtra("title","邀请码是什么"));
+                startActivity(new Intent(RegAndAccountActivity.this,BaseWebActivity.class).putExtra("title","邀请码是什么"));
                 break;
             case R.id.rl_modifi_phone:
-                startActivity(new Intent(RegAndAccountActivity.this,WebViewActivity.class).putExtra("title","我需要更换手机号"));
+                startActivity(new Intent(RegAndAccountActivity.this,BaseWebActivity.class).putExtra("title","我需要更换手机号"));
                 break;
         }
     }

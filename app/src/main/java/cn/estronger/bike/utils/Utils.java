@@ -86,7 +86,6 @@ public class Utils {
     /**
      * 得到自定义的progressDialog
      * @param context
-     * @param msg
      * @return
      */
     public static Dialog createLoadingDialog(Context context) {

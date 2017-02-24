@@ -49,7 +49,7 @@
             android:layout_width="0.5dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="18dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="18dp"
             android:layout_marginTop="18dp"
             android:layout_toRightOf="@id/rl_time"
             android:background="#dcdcdc" />
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="18dp"
             android:layout_toRightOf="@+id/line">
 
             <TextView
@@ -90,7 +90,7 @@
                     android:id="@+id/btn_statue"
                     android:layout_width="60dp"
                     android:layout_height="20dp"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/tv_coupon_time"
                     android:background="@drawable/semi_round_backgroud_gray">
                     <TextView

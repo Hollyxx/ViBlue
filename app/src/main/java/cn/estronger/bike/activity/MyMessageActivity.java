@@ -36,6 +36,8 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
     TextView tv_title;
     @ViewInject(R.id.rl_empty)
     RelativeLayout rl_empty;
+    @ViewInject(R.id.rl_view)
+    RelativeLayout rl_view;
     @ViewInject(R.id.xrv_list)
     XRecyclerView mRecyclerView;
     private ArrayList<MsgBean.DataBean.ItemsBean> listData;
@@ -60,7 +62,8 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
     private void init() {
         SysApplication.getInstance().addActivity(this);
         iv_back.setOnClickListener(this);
-        tv_title.setText("我的消息");
+        tv_title.setText(getResources().getText(R.string.My_message));
+        rl_view.setVisibility(View.GONE);
         Connect.getMessagesPb(this,page+"",this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -95,7 +98,7 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
     View.OnClickListener listener=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(MyMessageActivity.this,WebViewActivity.class).putExtra("url",listData.get(view.getId()).getMsg_link())
+            startActivity(new Intent(MyMessageActivity.this,BaseWebActivity.class).putExtra("url",listData.get(view.getId()).getMsg_link())
             .putExtra("title","消息详情"));
         }
     };
@@ -106,9 +109,6 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
             case R.id.iv_back:
                 finish();
                 break;
-
-
-
         }
     }
 
@@ -121,6 +121,7 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         switch (whereRequest) {
             case Connect.GET_MESSAGES:
                 if (getCode(result) == 0) {
+                    rl_view.setVisibility(View.VISIBLE);
                     MsgBean reditCount= new Gson().fromJson(result, MsgBean.class);
                     MsgBean.DataBean data=reditCount.getData();
                     total_page=data.getTotal_pages();

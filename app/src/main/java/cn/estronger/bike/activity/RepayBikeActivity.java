@@ -54,16 +54,16 @@ public class RepayBikeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_realname_no_pass:
-                startActivity(new Intent(RepayBikeActivity.this,WebViewActivity.class).putExtra("title","在哪还车"));
+                startActivity(new Intent(RepayBikeActivity.this,BaseWebActivity.class).putExtra("title","在哪还车"));
                 break;
             case R.id.rl_realname_isexist:
-                startActivity(new Intent(RepayBikeActivity.this,WebViewActivity.class).putExtra("title","服务区域"));
+                startActivity(new Intent(RepayBikeActivity.this,BaseWebActivity.class).putExtra("title","服务区域"));
                 break;
             case R.id.rl_about_invitation_code:
-                startActivity(new Intent(RepayBikeActivity.this,WebViewActivity.class).putExtra("title","我住的地方没有公共停车带怎么办"));
+                startActivity(new Intent(RepayBikeActivity.this,BaseWebActivity.class).putExtra("title","我住的地方没有公共停车带怎么办"));
                 break;
             case R.id.rl_modifi_phone:
-                startActivity(new Intent(RepayBikeActivity.this,WebViewActivity.class).putExtra("title","单车限行路段"));
+                startActivity(new Intent(RepayBikeActivity.this,BaseWebActivity.class).putExtra("title","单车限行路段"));
                 break;
         }
     }

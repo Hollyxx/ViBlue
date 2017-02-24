@@ -112,13 +112,13 @@ public class RegisterOverActivity extends BaseActivity implements MyHttpUtils.My
 
     private void showRationaleDialog(@StringRes int messageResId, final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.allow), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.refuse), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.cancel();

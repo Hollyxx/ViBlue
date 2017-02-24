@@ -139,6 +139,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="8dp"
                 android:layout_width="match_parent"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/semi_white_round_backgroud"
                 android:layout_height="40dp" />
 
@@ -154,6 +155,7 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="8dp"
                 android:layout_width="match_parent"
+                style="?android:attr/borderlessButtonStyle"
                 android:background="@drawable/semi_green_round_backgroud"
                 android:layout_height="40dp" />
         </LinearLayout>

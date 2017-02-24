@@ -2,9 +2,11 @@ package cn.estronger.bike.utils;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.tools.SystemTools;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -12,6 +14,10 @@ import org.xutils.x;
 
 import java.io.File;
 import java.util.HashMap;
+
+import cn.estronger.bike.activity.AboutUsActivity;
+
+import static cn.estronger.bike.R.id.tv_ver_name;
 
 /**
  * Created by MrLv on 2016/12/15.
@@ -29,12 +35,6 @@ public class MyHttpUtils {
      * @return
      */
     public static void xutilsGet(Context context,final int whereRequest, String url, HashMap<String, String> map, final MyHttpCallback callback) {
-//        final KProgressHUD hud = KProgressHUD.create(context)
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setWindowColor(Color.parseColor("#828282"))
-//                .setLabel("L O A D I N G")
-//                .setCancellable(false)
-//                .show();
         final Dialog hud =Utils.createLoadingDialog(context);
         hud.show();
         RequestParams params = new RequestParams(url);
@@ -42,7 +42,11 @@ public class MyHttpUtils {
             String value = map.get(key);
             params.addBodyParameter(key, value);
         }
-        params.addBodyParameter("token", "token值");
+        //        params.addBodyParameter("token", "token值");
+        try {
+            params.addBodyParameter("version", x.app().getPackageManager().getPackageInfo(context.getPackageName(),0).versionCode+"");
+        } catch (PackageManager.NameNotFoundException e) {
+        }
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -76,12 +80,6 @@ public class MyHttpUtils {
      * @param callback     回调方法
      */
     public static void xutilsPost(Context context, final int whereRequest, String url, HashMap<String, String> map, final MyHttpCallback callback) {
-//        final KProgressHUD hud = KProgressHUD.create(context)//把progressBar写在这里的话  就省去了再activity写很多的麻烦
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setWindowColor(Color.parseColor("#828282"))
-//                .setLabel("L O A D I N G")
-//                .setCancellable(false)
-//                .show();
         final Dialog hud =Utils.createLoadingDialog(context);
         hud.show();
         RequestParams params = new RequestParams(url);
@@ -89,7 +87,10 @@ public class MyHttpUtils {
             String value = map.get(key);
             params.addBodyParameter(key, value);
         }
-        params.addBodyParameter("token", "token值");
+        try {
+            params.addBodyParameter("version", x.app().getPackageManager().getPackageInfo(context.getPackageName(),0).versionCode+"");
+        } catch (PackageManager.NameNotFoundException e) {
+        }
         x.http().post(params, new Callback.CommonCallback<String>() {
 
             @Override
@@ -119,12 +120,6 @@ public class MyHttpUtils {
 
 
     public static void xutilsPostUpload(Context context, final int whereRequest, String url, HashMap<String, String> map,String cname,String filename ,final MyHttpCallback callback) {
-//        final KProgressHUD hud = KProgressHUD.create(context)//把progressBar写在这里的话  就省去了再activity写很多的麻烦
-//                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-//                .setWindowColor(Color.parseColor("#828282"))
-//                .setLabel("L O A D I N G")
-//                .setCancellable(false)
-//                .show();
         final Dialog hud =Utils.createLoadingDialog(context);
         hud.show();
         RequestParams params = new RequestParams(url);
@@ -133,6 +128,10 @@ public class MyHttpUtils {
             params.addBodyParameter(key, value);
         }
         params.addBodyParameter(cname, new File(filename));
+        try {
+            params.addBodyParameter("version", x.app().getPackageManager().getPackageInfo(context.getPackageName(),0).versionCode+"");
+        } catch (PackageManager.NameNotFoundException e) {
+        }
         x.http().post(params, new Callback.CommonCallback<String>() {
 
             @Override
@@ -171,7 +170,10 @@ public class MyHttpUtils {
             String value = map.get(key);
             params.addBodyParameter(key, value);
         }
-        params.addBodyParameter("token", "token值");
+        try {
+            params.addBodyParameter("version", x.app().getPackageManager().getPackageInfo(x.app().getPackageName(),0).versionCode+"");
+        } catch (PackageManager.NameNotFoundException e) {
+        }
         x.http().post(params, new Callback.CommonCallback<String>() {
 
             @Override

@@ -40,6 +40,7 @@ import cn.estronger.bike.utils.Validator;
 import cn.estronger.bike.widget.MyDialog;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
@@ -73,6 +74,8 @@ import static cn.estronger.bike.R.id.tv_nick_name;
 import static cn.estronger.bike.R.id.tv_phone;
 import static cn.estronger.bike.R.id.tv_real_name;
 import static cn.estronger.bike.R.id.tv_verify;
+import static cn.estronger.bike.activity.MainActivity.mLat;
+import static cn.estronger.bike.activity.MainActivity.mLng;
 import static cn.estronger.bike.connect.Connect.REQUEST_PERMISSION_SETTING;
 import static cn.estronger.bike.connect.Connect.ZXING_CODE;
 
@@ -116,7 +119,7 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
     LinearLayout view_header;
     private List<CheckBox> cbList;
     private String list = "", fault_content = "", bicycle_sn;
-    private boolean hasPic = false,hasPerm=true;
+    private boolean hasPic = false, hasPerm = true;
     private MyDialog myDialog;
     private ImageOptions imageOptions;
 
@@ -155,9 +158,9 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
         poUtil = new PopWindowUtil(this);
         poUtil.initPopWindow(this);
         EventBus.getDefault().register(this);
-        if (TextUtils.isEmpty(getIntent().getStringExtra("bike_sn"))){
+        if (TextUtils.isEmpty(getIntent().getStringExtra("bike_sn"))) {
             tv_code.setText("扫描或输入故障车辆编号");
-        }else {
+        } else {
             tv_code.setText(getIntent().getStringExtra("bike_sn"));
         }
         imageOptions = new ImageOptions.Builder()
@@ -203,21 +206,18 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.rl_zxing:
-                if(Utils.isCameraPermission()){
-                    startActivityForResult(new Intent(this, ZxingOtherActivity.class), Connect.ZXING_CODE);
-                }else {
-                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
-                }
+                startActivityForResult(new Intent(this, ZxingOtherActivity.class), Connect.ZXING_CODE);
                 break;
             case R.id.iv_photo:
-                if(Utils.isCameraPermission()){
-                    if (hasPerm){
+                if (Utils.isCameraPermission()) {
+                    if (hasPerm) {
                         poUtil.showPopWindow(ll_contanier);
-                    }else {
-                        ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
+                    } else {
+//                        ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
+                        FindBikeFaultActivityPermissionsDispatcher.showStorageWithCheck(this);
                     }
-                }else {
-                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
+                } else {
+                    FindBikeFaultActivityPermissionsDispatcher.showCameraWithCheck(this);
                 }
                 break;
             case R.id.btn_submit:
@@ -236,7 +236,11 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
                     ToastUtils.showShort(this, "请选择故障类型");
                     return;
                 }
-                Connect.addFault(this, MainActivity.mLat + "", MainActivity.mLng + "", bicycle_sn, list.substring(0, list.length() - 1), fault_content, hasPic ? SystemTools.HEAD_PATH : "", FindBikeFaultActivity.this);
+                if (!hasPic){
+                    ToastUtils.showShort(this, "请上传故障车辆照片");
+                    return;
+                }
+                Connect.addFault(this, mLat + "", mLng + "", bicycle_sn, list.substring(0, list.length() - 1), fault_content, hasPic ? SystemTools.HEAD_PATH : "", FindBikeFaultActivity.this);
                 list = "";
                 break;
             case R.id.ll_code_miss:
@@ -264,6 +268,21 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
                 cb_other.setChecked(cb_other.isChecked() ? false : true);
                 break;
         }
+    }
+
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void showCamera() {
+        poUtil.showPopWindow(ll_contanier);
+    }
+
+    @OnPermissionDenied(Manifest.permission.CAMERA)
+    void onCameraDenied() {
+        ToastUtils.showShort(this, "无法获取相机权限，请到设置里面打开相机权限");
+    }
+
+    @OnShowRationale(Manifest.permission.CAMERA)
+    void showRationaleForCamera(PermissionRequest request) {
+        showRationaleDialog(R.string.permission_camera_photo, request);
     }
 
     //处理消息，用于更新UI
@@ -296,14 +315,18 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
                     }
                     if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                         String result = bundle.getString(CodeUtils.RESULT_STRING);
-                        //这里还要加上二维码的判断    不是所有二维码 都可以往服务器发送
-                        if (!Validator.isLockCode(result)) {
-                            Toast toast = Toast.makeText(this, "     请扫描车锁二维码     ", Toast.LENGTH_LONG);
+                        if(Validator.isUrl(result)&&result.contains("b=")&&result.length()>15){
+                            if (Validator.isNumeric(result.substring(result.length()-11,result.length()))){
+                                tv_code.setText(result.substring(result.length()-11,result.length()));
+                            }else {
+                                ToastUtils.showShort(this, "请扫描单车二维码");
+                            }
+                        }else {
+                            Toast toast = Toast.makeText(this, "     请扫描单车二维码     ", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                             return;
                         }
-                        tv_code.setText(result);
                     } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                         ToastUtils.showShort(FindBikeFaultActivity.this, "解析二维码失败");
                     }
@@ -327,7 +350,7 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
                 if (data != null) {
                     try {
                         hasPic = true;
-                        x.image().bind(iv_photo, new File(SystemTools.HEAD_PATH).toURI().toString(),imageOptions);
+                        x.image().bind(iv_photo, new File(SystemTools.HEAD_PATH).toURI().toString(), imageOptions);
                     } catch (Exception e) {
                     }
                 }
@@ -353,20 +376,20 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
 
     @OnNeverAskAgain({Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE})
     void onStorageNeverAskAgain() {
-        hasPerm=false;
-        Toast toast=Toast.makeText(this,R.string.permission_storage_never_askagain, Toast.LENGTH_LONG);
-        showMyToast(toast, 5*1000);
+        hasPerm = false;
+        Toast toast = Toast.makeText(this, R.string.permission_storage_never_askagain, Toast.LENGTH_LONG);
+        showMyToast(toast, 5 * 1000);
     }
 
     private void showRationaleDialog(@StringRes int messageResId, final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.allow), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.refuse), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.cancel();
@@ -381,7 +404,7 @@ public class FindBikeFaultActivity extends BaseActivity implements View.OnClickL
     @Override
     public void onSuccess(String result, int whereRequest) {
         if (getCode(result) == 99) {
-            exitLogin(this,result);
+            exitLogin(this, result);
             return;
         }
         showMsg(result);

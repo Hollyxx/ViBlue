@@ -76,7 +76,7 @@
 
         <TextView
             style="@style/TvStyle"
-            android:text="检查新版本" />
+            android:text="@string/Check_the_new_version" />
 
         <ImageView style="@style/IvNextStyle" />
     </RelativeLayout>
@@ -89,7 +89,7 @@
 
         <TextView
             style="@style/TvStyle"
-            android:text="关于我们" />
+            android:text="@string/about_us" />
 
         <ImageView style="@style/IvNextStyle" />
     </RelativeLayout>
@@ -103,6 +103,6 @@
         <TextView
             android:layout_centerInParent="true"
             style="@style/TvStyle1"
-            android:text="退出登录" />
+            android:text="@string/Log_out" />
     </RelativeLayout>
 </LinearLayout>

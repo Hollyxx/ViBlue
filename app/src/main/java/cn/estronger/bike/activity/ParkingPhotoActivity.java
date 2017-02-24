@@ -38,6 +38,7 @@ import cn.estronger.bike.utils.Utils;
 import cn.estronger.bike.widget.MyDialog;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
@@ -138,7 +139,7 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
                         ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
                     }
                 }else {
-                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
+                    ParkingPhotoActivityPermissionsDispatcher.showCameraWithCheck(this);
                 }
                 break;
             case R.id.iv_bg:
@@ -149,7 +150,7 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
                         ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
                     }
                 }else {
-                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
+                    ParkingPhotoActivityPermissionsDispatcher.showCameraWithCheck(this);
                 }
                 break;
             case R.id.item_popupwindows_Photo://从相册获取图片
@@ -170,6 +171,25 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
                }
                 break;
         }
+    }
+
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void showCamera() {
+        if (hasPerm){
+            poUtil.showPopWindow(ll_contanier);
+        }else {
+            ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
+        }
+    }
+
+    @OnPermissionDenied(Manifest.permission.CAMERA)
+    void onCameraDenied() {
+        ToastUtils.showShort(this, "无法获取相机权限，请到设置里面打开相机权限");
+    }
+
+    @OnShowRationale(Manifest.permission.CAMERA)
+    void showRationaleForCamera(PermissionRequest request) {
+        showRationaleDialog(R.string.permission_camera_photo, request);
     }
 
     @Override
@@ -249,13 +269,13 @@ public class ParkingPhotoActivity extends BaseActivity implements View.OnClickLi
 
     private void showRationaleDialog(@StringRes int messageResId, final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.allow), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.refuse), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.cancel();

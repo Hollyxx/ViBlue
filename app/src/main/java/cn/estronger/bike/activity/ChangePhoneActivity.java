@@ -1,16 +1,21 @@
 package cn.estronger.bike.activity;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
 
 import cn.estronger.bike.R;
 import cn.estronger.bike.application.SysApplication;
@@ -21,15 +26,12 @@ import cn.estronger.bike.utils.ToastUtils;
 import cn.estronger.bike.utils.Validator;
 import cn.estronger.bike.widget.MyDialog;
 
-import org.greenrobot.eventbus.EventBus;
-import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 /**
  * Created by MrLv on 2016/12/11.
  */
 
-public class ChangePhoneActivity extends BaseActivity implements View.OnClickListener, MyHttpUtils.MyHttpCallback {
+public class ChangePhoneActivity extends BaseActivity implements TextWatcher,View.OnClickListener, MyHttpUtils.MyHttpCallback {
     @ViewInject(R.id.tv_title)
     TextView tv_title;
     @ViewInject(R.id.iv_back)
@@ -42,8 +44,10 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
     EditText et_id_card;
     @ViewInject(R.id.et_code)
     EditText et_code;
-    @ViewInject(R.id.btn_get_code)
-    Button btn_get_code;
+    @ViewInject(R.id.rl_get_code)
+    RelativeLayout rl_get_code;
+    @ViewInject(R.id.tv_get_code)
+    TextView tv_get_code;
     @ViewInject(R.id.btn_start)
     Button btn_start;
     private MyDialog myDialog;
@@ -66,9 +70,14 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
     private void init() {
         SysApplication.getInstance().addActivity(this);
         tv_title.setText("更换新手机号");
+        btn_start.setEnabled(false);
         iv_back.setOnClickListener(this);
-        btn_get_code.setOnClickListener(this);
+        rl_get_code.setOnClickListener(this);
         btn_start.setOnClickListener(this);
+        et_phone.addTextChangedListener(this);//增加文字监听   用于判断开始按钮是否可用
+        et_code.addTextChangedListener(this);
+        et_id_card.addTextChangedListener(this);
+        et_name.addTextChangedListener(this);
     }
 
     @Override
@@ -81,7 +90,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
                 myDialog.dismiss();
                 finish();
                 break;
-            case R.id.btn_get_code://获取验证码
+            case R.id.rl_get_code://获取验证码
                 //判断手机号是否正确
                 if (!Validator.isMobileNO(et_phone.getText().toString().trim())){
                     ToastUtils.showShort(this,"请正确输入手机号");
@@ -90,23 +99,6 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
                 Connect.getRegCode(this, et_phone.getText().toString().trim(), this);
                 break;
             case R.id.btn_start://开始
-                //正则判断
-                if (TextUtils.isEmpty(et_name.getText().toString().trim())){
-                    ToastUtils.showShort(this,"请正确输入真实姓名");
-                    return;
-                }
-                if (TextUtils.isEmpty(et_id_card.getText().toString().trim())||!Validator.IDCardValidate(et_id_card.getText().toString().trim())){
-                    ToastUtils.showShort(this,"请正确输入身份证号");
-                    return;
-                }
-                if (!Validator.isMobileNO(et_phone.getText().toString().trim())){
-                    ToastUtils.showShort(this,"请正确输入手机号");
-                    return;
-                }
-                if (!Validator.isCode(et_code.getText().toString().trim())){
-                    ToastUtils.showShort(this,"请正确的验证码");
-                    return;
-                }
                 Connect.updateModile(this,et_phone.getText().toString().trim(),et_code.getText().toString().trim()
                         ,et_name.getText().toString().trim(),et_id_card.getText().toString().trim(),this);
                 break;
@@ -124,7 +116,7 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
         switch (whereRequest) {
             case Connect.SEND_REGISTER_CODE:
                 if (getCode(result) == 0) {
-                    CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(btn_get_code, 60000, 1000);
+                    CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(ChangePhoneActivity.this,rl_get_code,tv_get_code, 60000, 1000);
                     mCountDownTimerUtils.start();//在接口返回成功后   开始倒计时
                 }
                 break;
@@ -146,6 +138,26 @@ public class ChangePhoneActivity extends BaseActivity implements View.OnClickLis
             case Connect.SEND_REGISTER_CODE:
                 ToastUtils.showShort(this, "发送失败，请重试");
                 break;
+        }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        if (Validator.isMobileNO(et_phone.getText().toString().trim()) && Validator.isCode(et_code.getText().toString().trim())
+                &&Validator.IDCardValidate(et_id_card.getText().toString().trim())&&Validator.isChinese(et_name.getText().toString().trim())) {
+            btn_start.setEnabled(true);//设置按钮可点击
+        } else {
+            btn_start.setEnabled(false);//设置按钮不可点击
         }
     }
 }

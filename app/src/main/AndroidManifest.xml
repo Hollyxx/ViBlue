@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.estronger.bike">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -203,9 +202,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name="cn.estronger.bike.activity.WebViewActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="cn.estronger.bike.activity.NaviActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -264,6 +260,9 @@
         <activity
             android:name="cn.estronger.bike.activity.CouponHistoryActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="cn.estronger.bike.activity.BaseWebActivity"
+            android:screenOrientation="portrait" />
 
         <receiver
             android:name="cn.estronger.bike.utils.MyReceiver"
@@ -279,8 +278,5 @@
                 <category android:name="cn.estronger.bike" />
             </intent-filter>
         </receiver>
-
-
     </application>
-
 </manifest>

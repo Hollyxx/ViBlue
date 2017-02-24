@@ -52,13 +52,13 @@ public class AboutEbikeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_realname_no_pass:
-                startActivity(new Intent(AboutEbikeActivity.this,WebViewActivity.class).putExtra("title","小强是谁"));
+                startActivity(new Intent(AboutEbikeActivity.this,BaseWebActivity.class).putExtra("title","小强是谁"));
                 break;
             case R.id.rl_realname_isexist:
-                startActivity(new Intent(AboutEbikeActivity.this,WebViewActivity.class).putExtra("title","我想加入小强"));
+                startActivity(new Intent(AboutEbikeActivity.this,BaseWebActivity.class).putExtra("title","我想加入小强"));
                 break;
             case R.id.rl_about_invitation_code:
-                startActivity(new Intent(AboutEbikeActivity.this,WebViewActivity.class).putExtra("title","做小强单车的初衷是什么"));
+                startActivity(new Intent(AboutEbikeActivity.this,BaseWebActivity.class).putExtra("title","做小强单车的初衷是什么"));
                 break;
         }
     }

@@ -123,13 +123,13 @@ public class ZxingActivity extends BaseActivity implements View.OnClickListener 
 
     private void showRationaleDialog(@StringRes int messageResId, final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.allow), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.refuse), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.cancel();
@@ -146,7 +146,7 @@ public class ZxingActivity extends BaseActivity implements View.OnClickListener 
         ll_input_num.setOnClickListener(this);
         //判断需不需要进入指导页面
         if (!PrefUtils.getBooleanWithName(this, "first", "is_intro_showed_zxing", false)) {
-            startActivity(new Intent(ZxingActivity.this, IntroActivity.class).putExtra("from", "z"));
+//            startActivity(new Intent(ZxingActivity.this, IntroActivity.class).putExtra("from", "z"));
         }
     }
 

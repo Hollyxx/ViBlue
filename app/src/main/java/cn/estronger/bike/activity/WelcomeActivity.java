@@ -14,6 +14,7 @@ import cn.estronger.bike.bean.Link;
 import cn.estronger.bike.connect.Connect;
 import cn.estronger.bike.utils.MyHttpUtils;
 import cn.estronger.bike.utils.PrefUtils;
+import cn.estronger.bike.utils.ToastUtils;
 import cn.estronger.bike.utils.Utils;
 import cn.estronger.bike.widget.MyDialog;
 import com.google.gson.Gson;
@@ -112,11 +113,11 @@ public class WelcomeActivity extends Activity implements MyHttpUtils.MyHttpCallb
      */
     private void jumpNextPage() {
         // 判断之前有没有显示过新手引导
-        boolean userGuide = PrefUtils.getBooleanWithName(this, "first", "is_user_guide_showed", false);
-        if (!userGuide) {
-            // 跳转到新手引导页
-            startActivity(new Intent(this, GuideActivity.class));
-        } else {
+//        boolean userGuide = PrefUtils.getBooleanWithName(this, "first", "is_user_guide_showed", false);
+//        if (!userGuide) {
+//            // 跳转到新手引导页
+//            startActivity(new Intent(this, GuideActivity.class));
+//        } else {
             if (hasorder) {
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("order", new Gson().toJson(cOrder));
@@ -124,7 +125,7 @@ public class WelcomeActivity extends Activity implements MyHttpUtils.MyHttpCallb
             } else {
                 startActivity(new Intent(this, MainActivity.class));
             }
-        }
+//        }
         finish();
     }
 

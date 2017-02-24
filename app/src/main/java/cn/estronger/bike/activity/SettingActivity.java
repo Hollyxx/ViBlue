@@ -75,7 +75,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     private void init() {
         SysApplication.getInstance().addActivity(this);
-        tv_title.setText("设置");
+        tv_title.setText(getResources().getText(R.string.settings));
         iv_back.setOnClickListener(this);
         rl_user_argument.setOnClickListener(this);
         rl_top_up_info.setOnClickListener(this);
@@ -95,16 +95,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.rl_user_argument:
-                startActivity(new Intent(SettingActivity.this,WebViewActivity.class).putExtra("title","用户协议"));
+                startActivity(new Intent(SettingActivity.this,BaseWebActivity.class).putExtra("title","用户协议"));
                 break;
             case R.id.rl_top_up_info:
-                startActivity(new Intent(SettingActivity.this,WebViewActivity.class).putExtra("title","押金说明"));
+                startActivity(new Intent(SettingActivity.this,BaseWebActivity.class).putExtra("title","押金说明"));
                 break;
             case R.id.rl_recharge_argument:
-                startActivity(new Intent(SettingActivity.this,WebViewActivity.class).putExtra("title","充值协议"));
+                startActivity(new Intent(SettingActivity.this,BaseWebActivity.class).putExtra("title","充值协议"));
                 break;
             case R.id.rl_expense_argument:
-                startActivity(new Intent(SettingActivity.this,WebViewActivity.class).putExtra("title","消费协议"));
+                startActivity(new Intent(SettingActivity.this,BaseWebActivity.class).putExtra("title","消费协议"));
                 break;
             case R.id.rl_update:
                 UpdateBuilder.create().strategy(new UpdateStrategy() {
@@ -125,7 +125,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         return true;
                     }
                 }).check(SettingActivity.this);
-//                Connect.getVersion(this,this);
                 break;
             case R.id.rl_about_us:
                 startActivity(new Intent(SettingActivity.this,AboutUsActivity.class));
@@ -157,20 +156,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                     finish();
                 }
                 break;
-            case Connect.VERSION:
-                if (getCode(result) == 0) {
-                    try {
-                        getVersionCode(SettingActivity.this);
-                        JSONObject object = new JSONObject(result);
-                        if (getVersionCode(SettingActivity.this)<object.getJSONObject("data").getInt("version_code")){
-
-                        }else {
-                            ToastUtils.showShort(SettingActivity.this,"你已经是最新版本");
-                        }
-                    } catch (JSONException e) {
-                    }
-                }
-                break;
         }
     }
 
@@ -180,23 +165,5 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             case Connect.LOG_OUT:
                 break;
         }
-    }
-
-    /**
-     * get App versionCode
-     * @param context
-     * @return
-     */
-    public int getVersionCode(Context context){
-        PackageManager packageManager=context.getPackageManager();
-        PackageInfo packageInfo;
-        int versionCode=0;
-        try {
-            packageInfo=packageManager.getPackageInfo(context.getPackageName(),0);
-            versionCode=packageInfo.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return versionCode;
     }
 }

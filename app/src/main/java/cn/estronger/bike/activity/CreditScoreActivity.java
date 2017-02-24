@@ -99,7 +99,7 @@ public class CreditScoreActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.iv_info:
-                startActivity(new Intent(CreditScoreActivity.this, WebViewActivity.class).putExtra("title", "什么是小强信用分"));
+                startActivity(new Intent(CreditScoreActivity.this, BaseWebActivity.class).putExtra("title", "什么是小强信用分"));
                 break;
 
         }

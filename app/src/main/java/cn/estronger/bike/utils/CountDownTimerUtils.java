@@ -1,11 +1,13 @@
 package cn.estronger.bike.utils;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import cn.estronger.bike.R;
@@ -17,7 +19,9 @@ import cn.estronger.bike.R;
   
 public class CountDownTimerUtils extends CountDownTimer {  
     private TextView mTextView;  
-  
+    private Context context;
+    private RelativeLayout rl_get_code;
+
     /** 
      * @param textView          The TextView 
      * 
@@ -28,16 +32,18 @@ public class CountDownTimerUtils extends CountDownTimer {
      * @param countDownInterval The interval along the way to receiver 
      *                          {@link #onTick(long)} callbacks. 
      */  
-    public CountDownTimerUtils(TextView textView, long millisInFuture, long countDownInterval) {  
+    public CountDownTimerUtils(Context context, RelativeLayout rl_get_code,TextView textView, long millisInFuture, long countDownInterval) {
         super(millisInFuture, countDownInterval);  
         this.mTextView = textView;  
-    }  
+        this.rl_get_code = rl_get_code;
+        this.context = context;
+    }
   
     @Override  
-    public void onTick(long millisUntilFinished) {  
-        mTextView.setClickable(false); //设置不可点击  
-        mTextView.setText(millisUntilFinished / 1000 + " 秒");  //设置倒计时时间
-        mTextView.setBackgroundResource(R.drawable.bg_identify_code_press); //设置按钮为灰色，这时是不能点击的
+    public void onTick(long millisUntilFinished) {
+        rl_get_code.setClickable(false); //设置不可点击
+        mTextView.setText(millisUntilFinished / 1000 + " "+context.getResources().getText(R.string.second));  //设置倒计时时间
+        rl_get_code.setBackgroundResource(R.drawable.bg_identify_code_press); //设置按钮为灰色，这时是不能点击的
   
         /** 
          * 超链接 URLSpan 
@@ -63,8 +69,8 @@ public class CountDownTimerUtils extends CountDownTimer {
   
     @Override  
     public void onFinish() {  
-        mTextView.setText("获取验证码");
-        mTextView.setClickable(true);//重新获得点击  
-        mTextView.setBackgroundResource(R.drawable.bg_identify_code_normal);  //还原背景色  
+        mTextView.setText(context.getResources().getText(R.string.Get_verification_code));
+        rl_get_code.setClickable(true);//重新获得点击
+        rl_get_code.setBackgroundResource(R.drawable.bg_identify_code_normal);  //还原背景色
     }  
 }  

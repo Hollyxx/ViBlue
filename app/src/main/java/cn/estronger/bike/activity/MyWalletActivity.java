@@ -63,11 +63,11 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
     LinearLayout ll_use_rule;
     @ViewInject(R.id.xrv_list)
     XRecyclerView mRecyclerView;
+    @ViewInject(R.id.view_header)
+    LinearLayout view_header;
     private int type;
     private String state;
     private MyDialog myDialog;
-    @ViewInject(R.id.view_header)
-    LinearLayout view_header;
     private int page=1,total_page,isOnRefresh=1;
     private MyCouponAdapter mAdapter;
     private ArrayList<Coupon.DataBean.ItemsBean> listData;
@@ -160,7 +160,7 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(this, CouponHistoryActivity.class));
                 break;
             case R.id.ll_use_rule://使用规则
-                startActivity(new Intent(this,WebViewActivity.class).putExtra("title","优惠券使用规则"));
+                startActivity(new Intent(this,BaseWebActivity.class).putExtra("title","优惠券使用规则"));
                 break;
         }
     }
@@ -177,13 +177,14 @@ public class MyWalletActivity extends BaseActivity implements View.OnClickListen
                     rl_content.setVisibility(View.VISIBLE);
                     WalletInfoBean walletInfo= new Gson().fromJson(result, WalletInfoBean.class);
                     tv_balance.setText(walletInfo.getData().getAvailable_deposit());
-                    tv_yajin.setText("押金 "+walletInfo.getData().getDeposit()+" 元");
+                    tv_yajin.setText(getResources().getText(R.string.guarantee_deposit)+" "+walletInfo.getData().getDeposit()+" "+
+                            getResources().getText(R.string.yuan));
                     if ("1".equals(walletInfo.getData().getDeposit_state())){
-                        tv_recharge_or_refund.setText("押金退款");
+                        tv_recharge_or_refund.setText(getResources().getText(R.string.The_deposit_refund));
                         tv_recharge_or_refund.setTextColor(Color.rgb(0,255,0));
                         type=1;
                     }else {
-                        tv_recharge_or_refund.setText("充押金");
+                        tv_recharge_or_refund.setText(getResources().getText(R.string.Charge_the_deposit));
                         tv_recharge_or_refund.setTextColor(Color.rgb(255,69,0));
                         type=2;
                     }

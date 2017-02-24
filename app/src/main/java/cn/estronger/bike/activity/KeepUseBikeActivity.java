@@ -53,13 +53,13 @@ public class KeepUseBikeActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_realname_no_pass:
-                startActivity(new Intent(KeepUseBikeActivity.this,WebViewActivity.class).putExtra("title","什么叫保留用车"));
+                startActivity(new Intent(KeepUseBikeActivity.this,BaseWebActivity.class).putExtra("title","什么叫保留用车"));
                 break;
             case R.id.rl_realname_isexist:
-                startActivity(new Intent(KeepUseBikeActivity.this,WebViewActivity.class).putExtra("title","如何保留用车"));
+                startActivity(new Intent(KeepUseBikeActivity.this,BaseWebActivity.class).putExtra("title","如何保留用车"));
                 break;
             case R.id.rl_about_invitation_code:
-                startActivity(new Intent(KeepUseBikeActivity.this,WebViewActivity.class).putExtra("title","保留用车后,如何继续骑行"));
+                startActivity(new Intent(KeepUseBikeActivity.this,BaseWebActivity.class).putExtra("title","保留用车后,如何继续骑行"));
                 break;
         }
     }

@@ -36,6 +36,8 @@ public class WalletDetailActivity extends BaseActivity implements MyHttpUtils.My
     XRecyclerView mRecyclerView;
     @ViewInject(R.id.rl_empty)
     RelativeLayout rl_empty;
+    @ViewInject(R.id.rl_view)
+    RelativeLayout rl_view;
     @ViewInject(R.id.view_header)
     LinearLayout view_header;
     private MyWalletDetailAdapter mAdapter;
@@ -57,6 +59,7 @@ public class WalletDetailActivity extends BaseActivity implements MyHttpUtils.My
 
     private void init() {
         SysApplication.getInstance().addActivity(this);
+        rl_view.setVisibility(View.GONE);
         Connect.getWalletDetailPb(this,page+"",this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -95,7 +98,7 @@ public class WalletDetailActivity extends BaseActivity implements MyHttpUtils.My
                 finish();
                 break;
             case R.id.tv_info:
-                startActivity(new Intent(WalletDetailActivity.this,WebViewActivity.class).putExtra("title","退款说明"));
+                startActivity(new Intent(WalletDetailActivity.this,BaseWebActivity.class).putExtra("title","退款说明"));
                 break;
             default:
                 break;
@@ -111,6 +114,7 @@ public class WalletDetailActivity extends BaseActivity implements MyHttpUtils.My
         switch (whereRequest) {
             case Connect.GET_WALLET_DETAIL:
                 if (getCode(result) == 0) {
+                    rl_view.setVisibility(View.VISIBLE);
                     WalletDetail reditCount= new Gson().fromJson(result, WalletDetail.class);
                     WalletDetail.DataBean data=reditCount.getData();
                     total_page=data.getTotal_pages();

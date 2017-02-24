@@ -32,6 +32,7 @@ import cn.estronger.bike.utils.Validator;
 import cn.estronger.bike.widget.MyDialog;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
 import permissions.dispatcher.OnShowRationale;
 import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
@@ -136,21 +137,22 @@ public class InformParkActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.rl_zxing:
-                if(Utils.isCameraPermission()){
+//                if(Utils.isCameraPermission()){
                     startActivityForResult(new Intent(InformParkActivity.this, ZxingOtherActivity.class), Connect.ZXING_CODE);
-                }else {
-                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
-                }
+//                }else {
+//                    InformParkActivityPermissionsDispatcher.showCameraWithCheck(this);
+//                }
                 break;
             case R.id.iv_photo:
                 if(Utils.isCameraPermission()){
                     if (hasPerm){
                         poUtil.showPopWindow(ll_contanier);
                     }else {
-                        ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
+                        InformParkActivityPermissionsDispatcher.showStorageWithCheck(this);
+//                        ToastUtils.showShort(this,"没有获得读取内存卡的权限，上传图片功能不可用");
                     }
                 }else {
-                    ToastUtils.showShort(this,"没有获得相机权限,请到设置里面打开");
+                    InformParkActivityPermissionsDispatcher.showCameraWithCheck(this);
                 }
                 break;
             case R.id.btn_submit:
@@ -160,9 +162,28 @@ public class InformParkActivity extends BaseActivity implements View.OnClickList
                     ToastUtils.showShort(this, "请扫描或输入违停车辆编号");
                     return;
                 }
+                if (!hasPic){
+                    ToastUtils.showShort(this, "请上传违停车辆照片");
+                    return;
+                }
                 Connect.addIllegalParking(this, MainActivity.mLat + "", MainActivity.mLng + "", bicycle_sn,fault_content, hasPic ? SystemTools.HEAD_PATH : "","1" ,InformParkActivity.this);
                 break;
         }
+    }
+
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void showCamera() {
+        poUtil.showPopWindow(ll_contanier);
+    }
+
+    @OnPermissionDenied(Manifest.permission.CAMERA)
+    void onCameraDenied() {
+        ToastUtils.showShort(this,"无法获取相机权限，请到设置里面打开相机权限");
+    }
+
+    @OnShowRationale(Manifest.permission.CAMERA)
+    void showRationaleForCamera(PermissionRequest request) {
+        showRationaleDialog(R.string.permission_camera_photo, request);
     }
 
 
@@ -206,13 +227,13 @@ public class InformParkActivity extends BaseActivity implements View.OnClickList
 
     private void showRationaleDialog(@StringRes int messageResId, final PermissionRequest request) {
         new AlertDialog.Builder(this)
-                .setPositiveButton("允许", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getText(R.string.allow), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.proceed();
                     }
                 })
-                .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getText(R.string.refuse), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialog, int which) {
                         request.cancel();
@@ -222,8 +243,6 @@ public class InformParkActivity extends BaseActivity implements View.OnClickList
                 .setMessage(messageResId)
                 .show();
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -239,14 +258,18 @@ public class InformParkActivity extends BaseActivity implements View.OnClickList
                     }
                     if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
                         String result = bundle.getString(CodeUtils.RESULT_STRING);
-                        //这里还要加上二维码的判断    不是所有二维码 都可以往服务器发送
-                        if (!Validator.isLockCode(result)) {
-                            Toast toast = Toast.makeText(this, "     请扫描车锁二维码     ", Toast.LENGTH_LONG);
+                        if(Validator.isUrl(result)&&result.contains("b=")&&result.length()>15){
+                            if (Validator.isNumeric(result.substring(result.length()-11,result.length()))){
+                                tv_code.setText(result.substring(result.length()-11,result.length()));
+                            }else {
+                                ToastUtils.showShort(this, "请扫描单车二维码");
+                            }
+                        }else {
+                            Toast toast = Toast.makeText(this, "     请扫描单车二维码     ", Toast.LENGTH_LONG);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
                             return;
                         }
-                        tv_code.setText(result);
                     } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
                         ToastUtils.showShort(InformParkActivity.this, "解析二维码失败");
                     }
@@ -302,5 +325,4 @@ public class InformParkActivity extends BaseActivity implements View.OnClickList
                 break;
         }
     }
-
 }

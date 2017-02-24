@@ -13,7 +13,9 @@
         style="@style/RlStyle"
         android:layout_marginTop="10dp">
 
-        <TextView style="@style/TvStyle" />
+        <TextView
+            style="@style/TvStyle"
+            android:text="@string/Avatar"/>
 
         <ImageView
             android:id="@+id/iv_next"
@@ -37,7 +39,7 @@
 
         <TextView
             style="@style/TvStyle"
-            android:text="昵称" />
+            android:text="@string/nickname" />
 
         <ImageView
             android:id="@+id/iv_nick_name"
@@ -60,7 +62,7 @@
 
         <TextView
             style="@style/TvStyle"
-            android:text="姓名" />
+            android:text="@string/name" />
 
 
         <TextView
@@ -80,7 +82,7 @@
 
         <TextView
             style="@style/TvStyle"
-            android:text="实名认证" />
+            android:text="@string/Certification" />
 
         <ImageView
             android:id="@+id/iv_certification"
@@ -103,7 +105,7 @@
 
         <TextView
             style="@style/TvStyle"
-            android:text="手机号" />
+            android:text="@string/Phone_number" />
 
         <ImageView
             android:id="@+id/iv_phone"

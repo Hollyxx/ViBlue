@@ -318,6 +318,7 @@
                     android:layout_marginRight="15dp"
                     android:background="@drawable/semi_round_backgroud"
                     android:text="提交"
+                    style="?android:attr/borderlessButtonStyle"
                     android:textColor="#ffffff" />
             </RelativeLayout>
         </LinearLayout>

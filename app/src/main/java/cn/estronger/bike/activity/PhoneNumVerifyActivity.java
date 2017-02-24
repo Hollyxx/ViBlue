@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import cn.estronger.bike.R;
@@ -43,8 +44,10 @@ public class PhoneNumVerifyActivity extends BaseActivity implements TextWatcher,
     EditText et_phone;
     @ViewInject(R.id.et_code)
     EditText et_code;
-    @ViewInject(R.id.btn_get_code)
-    Button btn_get_code;
+    @ViewInject(R.id.rl_get_code)
+    RelativeLayout rl_get_code;
+    @ViewInject(R.id.tv_get_code)
+    TextView tv_get_code;
     @ViewInject(R.id.btn_start)
     Button btn_start;
     private String type;
@@ -66,25 +69,25 @@ public class PhoneNumVerifyActivity extends BaseActivity implements TextWatcher,
     }
 
     private void init() {
-        tv_title.setText("手机验证");
+        tv_title.setText(getResources().getText(R.string.Phone_verification));
         btn_start.setEnabled(false);
         et_phone.addTextChangedListener(this);//增加文字监听   用于判断开始按钮是否可用
         et_code.addTextChangedListener(this);
     }
 
-    @Event(value = {R.id.btn_start, R.id.iv_back, R.id.tv_agreement, R.id.btn_get_code})
+    @Event(value = {R.id.btn_start, R.id.iv_back, R.id.tv_agreement, R.id.rl_get_code})
     private void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.tv_agreement://协议
-                startActivity(new Intent(PhoneNumVerifyActivity.this, WebViewActivity.class).putExtra("title", "小强单车用户协议"));
+                startActivity(new Intent(PhoneNumVerifyActivity.this, BaseWebActivity.class).putExtra("title", "小强单车用户协议"));
                 break;
-            case R.id.btn_get_code://获取验证码
+            case R.id.rl_get_code://获取验证码
                 //判断手机号是否正确
                 if (!Validator.isMobileNO(et_phone.getText().toString().trim())) {
-                    ToastUtils.showShort(this, "请正确输入手机号");
+                    ToastUtils.showShort(this, getResources().getText(R.string.Please_enter_the_phone_number_correctly));
                     return;
                 }
                 Connect.getRegCode(this, et_phone.getText().toString().trim(), this);
@@ -97,7 +100,7 @@ public class PhoneNumVerifyActivity extends BaseActivity implements TextWatcher,
                         Connect.login(this, et_phone.getText().toString().trim(), et_code.getText().toString().trim(), this);
                     }
                 } else {
-                    ToastUtils.showShort(this, "你还未获取验证码");
+                    ToastUtils.showShort(this, getResources().getText(R.string.You_have_not_got_the_verification_code));
                 }
                 break;
         }
@@ -135,7 +138,7 @@ public class PhoneNumVerifyActivity extends BaseActivity implements TextWatcher,
                         state = data.getString("state");
                     } catch (JSONException e) {
                     }
-                    CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(btn_get_code, 60000, 1000);
+                    CountDownTimerUtils mCountDownTimerUtils = new CountDownTimerUtils(PhoneNumVerifyActivity.this,rl_get_code,tv_get_code, 60000, 1000);
                     mCountDownTimerUtils.start();//在接口返回成功后   开始倒计时
                 }
                 break;
@@ -150,7 +153,6 @@ public class PhoneNumVerifyActivity extends BaseActivity implements TextWatcher,
                     PrefUtils.setString(PhoneNumVerifyActivity.this, "avatar", data.getAvatar());
                     PrefUtils.setString(PhoneNumVerifyActivity.this, "credit_point", data.getCredit_point());
                     PrefUtils.setString(PhoneNumVerifyActivity.this, "nickname", data.getNickname());
-
                     if ("0".equals(state)) {//去充押金页面
                         startActivity(new Intent(PhoneNumVerifyActivity.this, TopUpDepositActivity.class));
                     } else if ("1".equals(state)) {//去实名认证界面
@@ -167,7 +169,7 @@ public class PhoneNumVerifyActivity extends BaseActivity implements TextWatcher,
                         JSONObject data = new JSONObject(result).getJSONObject("data");
                         MyApp.userId = data.getString("user_id");
                         PrefUtils.setString(PhoneNumVerifyActivity.this, "user_id", data.getString("user_id"));
-                        PrefUtils.setString(PhoneNumVerifyActivity.this, "phone", et_phone.getText().toString().trim());
+                        PrefUtils.setString(PhoneNumVerifyActivity.this, "phone", data.getString("mobile"));
                         PrefUtils.setString(PhoneNumVerifyActivity.this, "state", state);
                         PrefUtils.setString(PhoneNumVerifyActivity.this, "avatar", state);
                     } catch (JSONException e) {
@@ -192,7 +194,7 @@ public class PhoneNumVerifyActivity extends BaseActivity implements TextWatcher,
     public void onError(String errorMsg, int whereRequest) {
         switch (whereRequest) {
             case Connect.SEND_REGISTER_CODE:
-                ToastUtils.showShort(this, "发送失败，请重试");
+                ToastUtils.showShort(this,getResources().getText(R.string.Send_failed_please_try_again));
                 break;
             case Connect.REGISTER:
                 break;

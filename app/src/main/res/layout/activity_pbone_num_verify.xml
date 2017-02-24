@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:text="手机号"
+            android:text="@string/Phone_number"
             android:textColor="#252525" />
 
         <EditText
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:background="@null"
-            android:hint="请输入手机号"
+            android:hint="@string/Please_enter_your_phone_number"
             android:inputType="number"
             android:maxLength="11"
             android:maxLines="1"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:text="验证码"
+                android:text="@string/Verification_Code"
                 android:textColor="#252525" />
 
             <EditText
@@ -64,30 +64,50 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
-                android:hint="请输入验证码"
+                android:hint="@string/Please_enter_the_verification_code"
                 android:inputType="number"
                 android:maxLength="6"
                 android:maxLines="1"
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <Button
+
+
+        <RelativeLayout
+            android:id="@+id/rl_get_code"
+            android:background="@drawable/semi_green_round_backgroud"
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_get_code"
+                android:text="@string/Get_verification_code"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+       <!-- <Button
             android:id="@+id/btn_get_code"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
             android:background="@drawable/semi_green_round_backgroud"
-            android:text="获取验证码"
-            android:textColor="#ffffff" />
+            android:text="@string/Get_verification_code"
+            android:textAllCaps="false"
+            android:textColor="#ffffff" />-->
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_start"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="开始"
+        android:text="@string/start"
+        android:textAllCaps="false"
         android:textColor="#ffffff"
         android:layout_margin="15dp"
+        style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/semi_btn_seletor"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -97,7 +117,7 @@
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="点击开始，即表示同意"/>
+            android:text="@string/Click_on_the_start"/>
         <TextView
             android:id="@+id/tv_agreement"
             android:layout_toRightOf="@id/tv"
@@ -105,7 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:textColor="@color/green_color"
-            android:text="《小强单车用户协议》"/>
+            android:text="@string/Agreement"/>
     </RelativeLayout>
 
 </LinearLayout>
