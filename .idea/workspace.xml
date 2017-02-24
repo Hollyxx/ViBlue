@@ -7,103 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="851a65c7-301c-48e4-bc46-564cdbec5d2e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/bean/LockInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/bean/MarkerInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/widget/ProgressWebView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/dot_white.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/progress_bar_states1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/roundness_bg.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_baseweb.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/values-en/string.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WebViewActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/BaseWebActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutBikeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutBikeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutEbikeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutEbikeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutScoreActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutScoreActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutUsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/AboutUsActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ChangePhoneActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ChangePhoneActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CouponHistoryActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CouponHistoryActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CreditScoreActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/CreditScoreActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/FindBikeFaultActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/FindBikeFaultActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/GuideActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/GuideActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InformParkActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InformParkActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InviteFriendActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/InviteFriendActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/KeepUseBikeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/KeepUseBikeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiNickNameActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ModifiNickNameActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyMessageActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyMessageActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyTravelActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyTravelActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyWalletActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/MyWalletActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/OrderAndOpenLockActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/OrderAndOpenLockActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/OtherActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/OtherActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ParkingPhotoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ParkingPhotoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/PhoneNumVerifyActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/PhoneNumVerifyActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/PriceAndDepositActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/PriceAndDepositActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RefundDepositActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RefundDepositActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RegAndAccountActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RegAndAccountActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RegisterOverActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RegisterOverActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RepayBikeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RepayBikeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RideOverActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/RideOverActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/SettingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/SettingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpDepositActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpDepositActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpRechargeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TopUpRechargeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TravelDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/TravelDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserGuideActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserGuideActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserInfoActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/UserInfoActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletDetailActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletRechargeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WalletRechargeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WelcomeActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/WelcomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ZxingActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ZxingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ZxingOtherActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/activity/ZxingOtherActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/bean/Coupon.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/bean/Coupon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/constant/NetConstant.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/constant/NetConstant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/utils/CountDownTimerUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/utils/CountDownTimerUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/utils/MyHttpUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/utils/MyHttpUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/utils/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/utils/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/utils/Validator.java" afterPath="$PROJECT_DIR$/app/src/main/java/cn/estronger/bike/utils/Validator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_certification.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_certification.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_change_phone.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_change_phone.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_coupon_history.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_coupon_history.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_credit_score.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_credit_score.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_find_bike_fault.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_find_bike_fault.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_guide.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_guide.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_inform_park.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_inform_park.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_input_bike_num.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_input_bike_num.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_input_bike_num_other.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_input_bike_num_other.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_invite_friend.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_invite_friend.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifi_nick_name.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifi_nick_name.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifi_phone.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_modifi_phone.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_msg.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_msg.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_travel.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_travel.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_wallet.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_my_wallet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_other.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_other.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_parking_photo.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_parking_photo.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pbone_num_verify.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pbone_num_verify.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_refund_deposit.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_refund_deposit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_over.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_over.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_seach.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_seach.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_setting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_top_up_deposit.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_top_up_deposit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_top_up_recharge.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_top_up_recharge.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_travel_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_travel_detail.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_info.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_info.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_detaill.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_detaill.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_recharge.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet_recharge.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_coupon.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_coupon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_history_coupon.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_history_coupon.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_header_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_header_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_nav.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_nav.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_ordering.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_ordering.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_pop_service.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_pop_service.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_popupwindows.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_popupwindows.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_start_order.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_start_order.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/listview_foot.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/listview_foot.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
     </list>
     <ignored path="xiaoqiang.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -2698,7 +2602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1487040491716</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="2.14次提交">
+      <created>1487913727291</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1487913727291</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2856,6 +2767,7 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2">
@@ -3027,6 +2939,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
